@@ -119,42 +119,15 @@ class ShopListingApi
      * Operation createDraftListing
      *
      * @param  int $shop_id The unique positive non-zero numeric ID for an Etsy Shop. (required)
-     * @param  int $quantity The positive non-zero number of products available for purchase in the listing. Note: The listing quantity is the sum of available offering quantities. You can request the quantities for individual offerings from the ListingInventory resource using the [getListingInventory](/documentation/reference#operation/getListingInventory) endpoint. (required)
-     * @param  string $title The listing&#39;s title string. Valid title strings contain only letters, numbers, punctuation marks, mathematical symbols, whitespace characters, ™, ©, and ®. (regex: /[^\\\\p{L}\\\\p{Nd}\\\\p{P}\\\\p{Sm}\\\\p{Zs}™©®]/u) You can only use the %, :, &amp; and + characters once each. (required)
-     * @param  string $description A description string of the product for sale in the listing. (required)
-     * @param  float $price The positive non-zero price of the product. (Sold product listings are private) Note: The price is the minimum possible price. The getInventory method requests exact prices for available offerings. (required)
-     * @param  string $who_made An enumerated string inidcated who made the product. Helps buyers locate the listing under the Handmade heading. (required)
-     * @param  string $when_made An enumerated string for the era in which the maker made the product in this listing. Helps buyers locate the listing under the Vintage heading. (required)
-     * @param  int $taxonomy_id The numeric taxonomy ID of the listing. The seller manages listing taxonomy IDs for their shop.  [See SellerTaxonomy](/documentation/reference#tag/SellerTaxonomy) for more information. (required)
-     * @param  int $shipping_profile_id The numeric ID of the [shipping profile](/documentation/reference#tag/ShopListing-ShippingProfile) associated with the listing. (required)
-     * @param  string[] $materials A list of material strings for materials used in the product. Valid materials strings contain only letters, numbers, and whitespace characters. (regex: /[^\\p{L}\\p{Nd}\\p{Zs}]/u) Default value is null. (optional)
-     * @param  int $shop_section_id The numeric ID of the [shop section](/documentation/reference#tag/Shop-Section) for this listing. Default value is null. (optional)
-     * @param  int $processing_min The minimum number of days required to process this listing. Default value is null. (optional)
-     * @param  int $processing_max The maximum number of days required to process this listing. Default value is null. (optional)
-     * @param  string[] $tags A list of tag strings for the listing. Valid tag strings contain only letters, numbers, whitespace characters, -, &#39;, ™, ©, and ®. (regex: /[^\\p{L}\\p{Nd}\\p{Zs}\\-&#39;™©®]/u) Default value is null. (optional)
-     * @param  string $recipient An enumerated string indicating a person for whom this product would make an appropriate gift. Default value is null. (optional)
-     * @param  string $occasion An enumerated string indicating an occassion for which this product would make an appropriate gift. Default value is null. (optional)
-     * @param  string[] $styles An array of style strings for this listing, each of which is free-form text string such as \&quot;Formal\&quot;, or \&quot;Steampunk\&quot;. A Listing may have up to two styles. Valid style strings contain only letters, numbers, and whitespace characters. (regex: /[^\\p{L}\\p{Nd}\\p{Zs}]/u) Default value is null. (optional)
-     * @param  float $item_weight The numeric weight of the product measured in units set in &#39;item_weight_unit&#39;. Default value is null. (optional)
-     * @param  float $item_length The numeric length of the product measured in units set in &#39;item_dimensions_unit&#39;. Default value is null. (optional)
-     * @param  float $item_width The numeric width of the product measured in units set in &#39;item_dimensions_unit&#39;. Default value is null. (optional)
-     * @param  float $item_height The numeric height of the product measured in units set in &#39;item_dimensions_unit&#39;. Default value is null. (optional)
-     * @param  string $item_weight_unit A string defining the units used to measure the weight of the product. Default value is null. (optional)
-     * @param  string $item_dimensions_unit A string defining the units used to measure the dimensions of the product. Default value is null. (optional)
-     * @param  bool $is_personalizable When true, this listing is personalizable. The default value is null. (optional)
-     * @param  int[] $image_ids An array of numeric image IDs of the images in a listing, which can include up to 10 images. (optional)
-     * @param  bool $is_supply When true, tags the listing as a supply product. Helps buyers locate the listing under the Supplies heading. (optional)
-     * @param  bool $is_customizable When true, a buyer may contact the seller for a customized order. The default value is true when a shop accepts custom orders. Does not apply to shops that do not accept custom orders. (optional)
-     * @param  bool $is_taxable When true, applicable [shop](/documentation/reference#tag/Shop) tax rates apply to this listing at checkout. (optional)
-     * @param  bool $is_private When true, this is a private listing intendend for a specific buyer and hidden from shop view. (optional)
+     * @param  \EtsyApi\Model\ShopListingRequest $shop_listing_request shop_listing_request (optional)
      *
      * @throws \EtsyApi\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return \EtsyApi\Model\ShopListing|\EtsyApi\Model\ErrorSchema|\EtsyApi\Model\ErrorSchema|\EtsyApi\Model\ErrorSchema|\EtsyApi\Model\ErrorSchema
      */
-    public function createDraftListing($shop_id, $quantity, $title, $description, $price, $who_made, $when_made, $taxonomy_id, $shipping_profile_id, $materials = null, $shop_section_id = null, $processing_min = null, $processing_max = null, $tags = null, $recipient = null, $occasion = null, $styles = null, $item_weight = null, $item_length = null, $item_width = null, $item_height = null, $item_weight_unit = null, $item_dimensions_unit = null, $is_personalizable = null, $image_ids = null, $is_supply = null, $is_customizable = null, $is_taxable = null, $is_private = null)
+    public function createDraftListing($shop_id, $shop_listing_request = null)
     {
-        list($response) = $this->createDraftListingWithHttpInfo($shop_id, $quantity, $title, $description, $price, $who_made, $when_made, $taxonomy_id, $shipping_profile_id, $materials, $shop_section_id, $processing_min, $processing_max, $tags, $recipient, $occasion, $styles, $item_weight, $item_length, $item_width, $item_height, $item_weight_unit, $item_dimensions_unit, $is_personalizable, $image_ids, $is_supply, $is_customizable, $is_taxable, $is_private);
+        list($response) = $this->createDraftListingWithHttpInfo($shop_id, $shop_listing_request);
         return $response;
     }
 
@@ -162,42 +135,15 @@ class ShopListingApi
      * Operation createDraftListingWithHttpInfo
      *
      * @param  int $shop_id The unique positive non-zero numeric ID for an Etsy Shop. (required)
-     * @param  int $quantity The positive non-zero number of products available for purchase in the listing. Note: The listing quantity is the sum of available offering quantities. You can request the quantities for individual offerings from the ListingInventory resource using the [getListingInventory](/documentation/reference#operation/getListingInventory) endpoint. (required)
-     * @param  string $title The listing&#39;s title string. Valid title strings contain only letters, numbers, punctuation marks, mathematical symbols, whitespace characters, ™, ©, and ®. (regex: /[^\\\\p{L}\\\\p{Nd}\\\\p{P}\\\\p{Sm}\\\\p{Zs}™©®]/u) You can only use the %, :, &amp; and + characters once each. (required)
-     * @param  string $description A description string of the product for sale in the listing. (required)
-     * @param  float $price The positive non-zero price of the product. (Sold product listings are private) Note: The price is the minimum possible price. The getInventory method requests exact prices for available offerings. (required)
-     * @param  string $who_made An enumerated string inidcated who made the product. Helps buyers locate the listing under the Handmade heading. (required)
-     * @param  string $when_made An enumerated string for the era in which the maker made the product in this listing. Helps buyers locate the listing under the Vintage heading. (required)
-     * @param  int $taxonomy_id The numeric taxonomy ID of the listing. The seller manages listing taxonomy IDs for their shop.  [See SellerTaxonomy](/documentation/reference#tag/SellerTaxonomy) for more information. (required)
-     * @param  int $shipping_profile_id The numeric ID of the [shipping profile](/documentation/reference#tag/ShopListing-ShippingProfile) associated with the listing. (required)
-     * @param  string[] $materials A list of material strings for materials used in the product. Valid materials strings contain only letters, numbers, and whitespace characters. (regex: /[^\\p{L}\\p{Nd}\\p{Zs}]/u) Default value is null. (optional)
-     * @param  int $shop_section_id The numeric ID of the [shop section](/documentation/reference#tag/Shop-Section) for this listing. Default value is null. (optional)
-     * @param  int $processing_min The minimum number of days required to process this listing. Default value is null. (optional)
-     * @param  int $processing_max The maximum number of days required to process this listing. Default value is null. (optional)
-     * @param  string[] $tags A list of tag strings for the listing. Valid tag strings contain only letters, numbers, whitespace characters, -, &#39;, ™, ©, and ®. (regex: /[^\\p{L}\\p{Nd}\\p{Zs}\\-&#39;™©®]/u) Default value is null. (optional)
-     * @param  string $recipient An enumerated string indicating a person for whom this product would make an appropriate gift. Default value is null. (optional)
-     * @param  string $occasion An enumerated string indicating an occassion for which this product would make an appropriate gift. Default value is null. (optional)
-     * @param  string[] $styles An array of style strings for this listing, each of which is free-form text string such as \&quot;Formal\&quot;, or \&quot;Steampunk\&quot;. A Listing may have up to two styles. Valid style strings contain only letters, numbers, and whitespace characters. (regex: /[^\\p{L}\\p{Nd}\\p{Zs}]/u) Default value is null. (optional)
-     * @param  float $item_weight The numeric weight of the product measured in units set in &#39;item_weight_unit&#39;. Default value is null. (optional)
-     * @param  float $item_length The numeric length of the product measured in units set in &#39;item_dimensions_unit&#39;. Default value is null. (optional)
-     * @param  float $item_width The numeric width of the product measured in units set in &#39;item_dimensions_unit&#39;. Default value is null. (optional)
-     * @param  float $item_height The numeric height of the product measured in units set in &#39;item_dimensions_unit&#39;. Default value is null. (optional)
-     * @param  string $item_weight_unit A string defining the units used to measure the weight of the product. Default value is null. (optional)
-     * @param  string $item_dimensions_unit A string defining the units used to measure the dimensions of the product. Default value is null. (optional)
-     * @param  bool $is_personalizable When true, this listing is personalizable. The default value is null. (optional)
-     * @param  int[] $image_ids An array of numeric image IDs of the images in a listing, which can include up to 10 images. (optional)
-     * @param  bool $is_supply When true, tags the listing as a supply product. Helps buyers locate the listing under the Supplies heading. (optional)
-     * @param  bool $is_customizable When true, a buyer may contact the seller for a customized order. The default value is true when a shop accepts custom orders. Does not apply to shops that do not accept custom orders. (optional)
-     * @param  bool $is_taxable When true, applicable [shop](/documentation/reference#tag/Shop) tax rates apply to this listing at checkout. (optional)
-     * @param  bool $is_private When true, this is a private listing intendend for a specific buyer and hidden from shop view. (optional)
+     * @param  \EtsyApi\Model\ShopListingRequest $shop_listing_request (optional)
      *
      * @throws \EtsyApi\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return array of \EtsyApi\Model\ShopListing|\EtsyApi\Model\ErrorSchema|\EtsyApi\Model\ErrorSchema|\EtsyApi\Model\ErrorSchema|\EtsyApi\Model\ErrorSchema, HTTP status code, HTTP response headers (array of strings)
      */
-    public function createDraftListingWithHttpInfo($shop_id, $quantity, $title, $description, $price, $who_made, $when_made, $taxonomy_id, $shipping_profile_id, $materials = null, $shop_section_id = null, $processing_min = null, $processing_max = null, $tags = null, $recipient = null, $occasion = null, $styles = null, $item_weight = null, $item_length = null, $item_width = null, $item_height = null, $item_weight_unit = null, $item_dimensions_unit = null, $is_personalizable = null, $image_ids = null, $is_supply = null, $is_customizable = null, $is_taxable = null, $is_private = null)
+    public function createDraftListingWithHttpInfo($shop_id, $shop_listing_request = null)
     {
-        $request = $this->createDraftListingRequest($shop_id, $quantity, $title, $description, $price, $who_made, $when_made, $taxonomy_id, $shipping_profile_id, $materials, $shop_section_id, $processing_min, $processing_max, $tags, $recipient, $occasion, $styles, $item_weight, $item_length, $item_width, $item_height, $item_weight_unit, $item_dimensions_unit, $is_personalizable, $image_ids, $is_supply, $is_customizable, $is_taxable, $is_private);
+        $request = $this->createDraftListingRequest($shop_id, $shop_listing_request);
 
         try {
             $options = $this->createHttpClientOption();
@@ -358,41 +304,14 @@ class ShopListingApi
      * 
      *
      * @param  int $shop_id The unique positive non-zero numeric ID for an Etsy Shop. (required)
-     * @param  int $quantity The positive non-zero number of products available for purchase in the listing. Note: The listing quantity is the sum of available offering quantities. You can request the quantities for individual offerings from the ListingInventory resource using the [getListingInventory](/documentation/reference#operation/getListingInventory) endpoint. (required)
-     * @param  string $title The listing&#39;s title string. Valid title strings contain only letters, numbers, punctuation marks, mathematical symbols, whitespace characters, ™, ©, and ®. (regex: /[^\\\\p{L}\\\\p{Nd}\\\\p{P}\\\\p{Sm}\\\\p{Zs}™©®]/u) You can only use the %, :, &amp; and + characters once each. (required)
-     * @param  string $description A description string of the product for sale in the listing. (required)
-     * @param  float $price The positive non-zero price of the product. (Sold product listings are private) Note: The price is the minimum possible price. The getInventory method requests exact prices for available offerings. (required)
-     * @param  string $who_made An enumerated string inidcated who made the product. Helps buyers locate the listing under the Handmade heading. (required)
-     * @param  string $when_made An enumerated string for the era in which the maker made the product in this listing. Helps buyers locate the listing under the Vintage heading. (required)
-     * @param  int $taxonomy_id The numeric taxonomy ID of the listing. The seller manages listing taxonomy IDs for their shop.  [See SellerTaxonomy](/documentation/reference#tag/SellerTaxonomy) for more information. (required)
-     * @param  int $shipping_profile_id The numeric ID of the [shipping profile](/documentation/reference#tag/ShopListing-ShippingProfile) associated with the listing. (required)
-     * @param  string[] $materials A list of material strings for materials used in the product. Valid materials strings contain only letters, numbers, and whitespace characters. (regex: /[^\\p{L}\\p{Nd}\\p{Zs}]/u) Default value is null. (optional)
-     * @param  int $shop_section_id The numeric ID of the [shop section](/documentation/reference#tag/Shop-Section) for this listing. Default value is null. (optional)
-     * @param  int $processing_min The minimum number of days required to process this listing. Default value is null. (optional)
-     * @param  int $processing_max The maximum number of days required to process this listing. Default value is null. (optional)
-     * @param  string[] $tags A list of tag strings for the listing. Valid tag strings contain only letters, numbers, whitespace characters, -, &#39;, ™, ©, and ®. (regex: /[^\\p{L}\\p{Nd}\\p{Zs}\\-&#39;™©®]/u) Default value is null. (optional)
-     * @param  string $recipient An enumerated string indicating a person for whom this product would make an appropriate gift. Default value is null. (optional)
-     * @param  string $occasion An enumerated string indicating an occassion for which this product would make an appropriate gift. Default value is null. (optional)
-     * @param  string[] $styles An array of style strings for this listing, each of which is free-form text string such as \&quot;Formal\&quot;, or \&quot;Steampunk\&quot;. A Listing may have up to two styles. Valid style strings contain only letters, numbers, and whitespace characters. (regex: /[^\\p{L}\\p{Nd}\\p{Zs}]/u) Default value is null. (optional)
-     * @param  float $item_weight The numeric weight of the product measured in units set in &#39;item_weight_unit&#39;. Default value is null. (optional)
-     * @param  float $item_length The numeric length of the product measured in units set in &#39;item_dimensions_unit&#39;. Default value is null. (optional)
-     * @param  float $item_width The numeric width of the product measured in units set in &#39;item_dimensions_unit&#39;. Default value is null. (optional)
-     * @param  float $item_height The numeric height of the product measured in units set in &#39;item_dimensions_unit&#39;. Default value is null. (optional)
-     * @param  string $item_weight_unit A string defining the units used to measure the weight of the product. Default value is null. (optional)
-     * @param  string $item_dimensions_unit A string defining the units used to measure the dimensions of the product. Default value is null. (optional)
-     * @param  bool $is_personalizable When true, this listing is personalizable. The default value is null. (optional)
-     * @param  int[] $image_ids An array of numeric image IDs of the images in a listing, which can include up to 10 images. (optional)
-     * @param  bool $is_supply When true, tags the listing as a supply product. Helps buyers locate the listing under the Supplies heading. (optional)
-     * @param  bool $is_customizable When true, a buyer may contact the seller for a customized order. The default value is true when a shop accepts custom orders. Does not apply to shops that do not accept custom orders. (optional)
-     * @param  bool $is_taxable When true, applicable [shop](/documentation/reference#tag/Shop) tax rates apply to this listing at checkout. (optional)
-     * @param  bool $is_private When true, this is a private listing intendend for a specific buyer and hidden from shop view. (optional)
+     * @param  \EtsyApi\Model\ShopListingRequest $shop_listing_request (optional)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function createDraftListingAsync($shop_id, $quantity, $title, $description, $price, $who_made, $when_made, $taxonomy_id, $shipping_profile_id, $materials = null, $shop_section_id = null, $processing_min = null, $processing_max = null, $tags = null, $recipient = null, $occasion = null, $styles = null, $item_weight = null, $item_length = null, $item_width = null, $item_height = null, $item_weight_unit = null, $item_dimensions_unit = null, $is_personalizable = null, $image_ids = null, $is_supply = null, $is_customizable = null, $is_taxable = null, $is_private = null)
+    public function createDraftListingAsync($shop_id, $shop_listing_request = null)
     {
-        return $this->createDraftListingAsyncWithHttpInfo($shop_id, $quantity, $title, $description, $price, $who_made, $when_made, $taxonomy_id, $shipping_profile_id, $materials, $shop_section_id, $processing_min, $processing_max, $tags, $recipient, $occasion, $styles, $item_weight, $item_length, $item_width, $item_height, $item_weight_unit, $item_dimensions_unit, $is_personalizable, $image_ids, $is_supply, $is_customizable, $is_taxable, $is_private)
+        return $this->createDraftListingAsyncWithHttpInfo($shop_id, $shop_listing_request)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -406,42 +325,15 @@ class ShopListingApi
      * 
      *
      * @param  int $shop_id The unique positive non-zero numeric ID for an Etsy Shop. (required)
-     * @param  int $quantity The positive non-zero number of products available for purchase in the listing. Note: The listing quantity is the sum of available offering quantities. You can request the quantities for individual offerings from the ListingInventory resource using the [getListingInventory](/documentation/reference#operation/getListingInventory) endpoint. (required)
-     * @param  string $title The listing&#39;s title string. Valid title strings contain only letters, numbers, punctuation marks, mathematical symbols, whitespace characters, ™, ©, and ®. (regex: /[^\\\\p{L}\\\\p{Nd}\\\\p{P}\\\\p{Sm}\\\\p{Zs}™©®]/u) You can only use the %, :, &amp; and + characters once each. (required)
-     * @param  string $description A description string of the product for sale in the listing. (required)
-     * @param  float $price The positive non-zero price of the product. (Sold product listings are private) Note: The price is the minimum possible price. The getInventory method requests exact prices for available offerings. (required)
-     * @param  string $who_made An enumerated string inidcated who made the product. Helps buyers locate the listing under the Handmade heading. (required)
-     * @param  string $when_made An enumerated string for the era in which the maker made the product in this listing. Helps buyers locate the listing under the Vintage heading. (required)
-     * @param  int $taxonomy_id The numeric taxonomy ID of the listing. The seller manages listing taxonomy IDs for their shop.  [See SellerTaxonomy](/documentation/reference#tag/SellerTaxonomy) for more information. (required)
-     * @param  int $shipping_profile_id The numeric ID of the [shipping profile](/documentation/reference#tag/ShopListing-ShippingProfile) associated with the listing. (required)
-     * @param  string[] $materials A list of material strings for materials used in the product. Valid materials strings contain only letters, numbers, and whitespace characters. (regex: /[^\\p{L}\\p{Nd}\\p{Zs}]/u) Default value is null. (optional)
-     * @param  int $shop_section_id The numeric ID of the [shop section](/documentation/reference#tag/Shop-Section) for this listing. Default value is null. (optional)
-     * @param  int $processing_min The minimum number of days required to process this listing. Default value is null. (optional)
-     * @param  int $processing_max The maximum number of days required to process this listing. Default value is null. (optional)
-     * @param  string[] $tags A list of tag strings for the listing. Valid tag strings contain only letters, numbers, whitespace characters, -, &#39;, ™, ©, and ®. (regex: /[^\\p{L}\\p{Nd}\\p{Zs}\\-&#39;™©®]/u) Default value is null. (optional)
-     * @param  string $recipient An enumerated string indicating a person for whom this product would make an appropriate gift. Default value is null. (optional)
-     * @param  string $occasion An enumerated string indicating an occassion for which this product would make an appropriate gift. Default value is null. (optional)
-     * @param  string[] $styles An array of style strings for this listing, each of which is free-form text string such as \&quot;Formal\&quot;, or \&quot;Steampunk\&quot;. A Listing may have up to two styles. Valid style strings contain only letters, numbers, and whitespace characters. (regex: /[^\\p{L}\\p{Nd}\\p{Zs}]/u) Default value is null. (optional)
-     * @param  float $item_weight The numeric weight of the product measured in units set in &#39;item_weight_unit&#39;. Default value is null. (optional)
-     * @param  float $item_length The numeric length of the product measured in units set in &#39;item_dimensions_unit&#39;. Default value is null. (optional)
-     * @param  float $item_width The numeric width of the product measured in units set in &#39;item_dimensions_unit&#39;. Default value is null. (optional)
-     * @param  float $item_height The numeric height of the product measured in units set in &#39;item_dimensions_unit&#39;. Default value is null. (optional)
-     * @param  string $item_weight_unit A string defining the units used to measure the weight of the product. Default value is null. (optional)
-     * @param  string $item_dimensions_unit A string defining the units used to measure the dimensions of the product. Default value is null. (optional)
-     * @param  bool $is_personalizable When true, this listing is personalizable. The default value is null. (optional)
-     * @param  int[] $image_ids An array of numeric image IDs of the images in a listing, which can include up to 10 images. (optional)
-     * @param  bool $is_supply When true, tags the listing as a supply product. Helps buyers locate the listing under the Supplies heading. (optional)
-     * @param  bool $is_customizable When true, a buyer may contact the seller for a customized order. The default value is true when a shop accepts custom orders. Does not apply to shops that do not accept custom orders. (optional)
-     * @param  bool $is_taxable When true, applicable [shop](/documentation/reference#tag/Shop) tax rates apply to this listing at checkout. (optional)
-     * @param  bool $is_private When true, this is a private listing intendend for a specific buyer and hidden from shop view. (optional)
+     * @param  \EtsyApi\Model\ShopListingRequest $shop_listing_request (optional)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function createDraftListingAsyncWithHttpInfo($shop_id, $quantity, $title, $description, $price, $who_made, $when_made, $taxonomy_id, $shipping_profile_id, $materials = null, $shop_section_id = null, $processing_min = null, $processing_max = null, $tags = null, $recipient = null, $occasion = null, $styles = null, $item_weight = null, $item_length = null, $item_width = null, $item_height = null, $item_weight_unit = null, $item_dimensions_unit = null, $is_personalizable = null, $image_ids = null, $is_supply = null, $is_customizable = null, $is_taxable = null, $is_private = null)
+    public function createDraftListingAsyncWithHttpInfo($shop_id, $shop_listing_request = null)
     {
         $returnType = '\EtsyApi\Model\ShopListing';
-        $request = $this->createDraftListingRequest($shop_id, $quantity, $title, $description, $price, $who_made, $when_made, $taxonomy_id, $shipping_profile_id, $materials, $shop_section_id, $processing_min, $processing_max, $tags, $recipient, $occasion, $styles, $item_weight, $item_length, $item_width, $item_height, $item_weight_unit, $item_dimensions_unit, $is_personalizable, $image_ids, $is_supply, $is_customizable, $is_taxable, $is_private);
+        $request = $this->createDraftListingRequest($shop_id, $shop_listing_request);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -481,39 +373,12 @@ class ShopListingApi
      * Create request for operation 'createDraftListing'
      *
      * @param  int $shop_id The unique positive non-zero numeric ID for an Etsy Shop. (required)
-     * @param  int $quantity The positive non-zero number of products available for purchase in the listing. Note: The listing quantity is the sum of available offering quantities. You can request the quantities for individual offerings from the ListingInventory resource using the [getListingInventory](/documentation/reference#operation/getListingInventory) endpoint. (required)
-     * @param  string $title The listing&#39;s title string. Valid title strings contain only letters, numbers, punctuation marks, mathematical symbols, whitespace characters, ™, ©, and ®. (regex: /[^\\\\p{L}\\\\p{Nd}\\\\p{P}\\\\p{Sm}\\\\p{Zs}™©®]/u) You can only use the %, :, &amp; and + characters once each. (required)
-     * @param  string $description A description string of the product for sale in the listing. (required)
-     * @param  float $price The positive non-zero price of the product. (Sold product listings are private) Note: The price is the minimum possible price. The getInventory method requests exact prices for available offerings. (required)
-     * @param  string $who_made An enumerated string inidcated who made the product. Helps buyers locate the listing under the Handmade heading. (required)
-     * @param  string $when_made An enumerated string for the era in which the maker made the product in this listing. Helps buyers locate the listing under the Vintage heading. (required)
-     * @param  int $taxonomy_id The numeric taxonomy ID of the listing. The seller manages listing taxonomy IDs for their shop.  [See SellerTaxonomy](/documentation/reference#tag/SellerTaxonomy) for more information. (required)
-     * @param  int $shipping_profile_id The numeric ID of the [shipping profile](/documentation/reference#tag/ShopListing-ShippingProfile) associated with the listing. (required)
-     * @param  string[] $materials A list of material strings for materials used in the product. Valid materials strings contain only letters, numbers, and whitespace characters. (regex: /[^\\p{L}\\p{Nd}\\p{Zs}]/u) Default value is null. (optional)
-     * @param  int $shop_section_id The numeric ID of the [shop section](/documentation/reference#tag/Shop-Section) for this listing. Default value is null. (optional)
-     * @param  int $processing_min The minimum number of days required to process this listing. Default value is null. (optional)
-     * @param  int $processing_max The maximum number of days required to process this listing. Default value is null. (optional)
-     * @param  string[] $tags A list of tag strings for the listing. Valid tag strings contain only letters, numbers, whitespace characters, -, &#39;, ™, ©, and ®. (regex: /[^\\p{L}\\p{Nd}\\p{Zs}\\-&#39;™©®]/u) Default value is null. (optional)
-     * @param  string $recipient An enumerated string indicating a person for whom this product would make an appropriate gift. Default value is null. (optional)
-     * @param  string $occasion An enumerated string indicating an occassion for which this product would make an appropriate gift. Default value is null. (optional)
-     * @param  string[] $styles An array of style strings for this listing, each of which is free-form text string such as \&quot;Formal\&quot;, or \&quot;Steampunk\&quot;. A Listing may have up to two styles. Valid style strings contain only letters, numbers, and whitespace characters. (regex: /[^\\p{L}\\p{Nd}\\p{Zs}]/u) Default value is null. (optional)
-     * @param  float $item_weight The numeric weight of the product measured in units set in &#39;item_weight_unit&#39;. Default value is null. (optional)
-     * @param  float $item_length The numeric length of the product measured in units set in &#39;item_dimensions_unit&#39;. Default value is null. (optional)
-     * @param  float $item_width The numeric width of the product measured in units set in &#39;item_dimensions_unit&#39;. Default value is null. (optional)
-     * @param  float $item_height The numeric height of the product measured in units set in &#39;item_dimensions_unit&#39;. Default value is null. (optional)
-     * @param  string $item_weight_unit A string defining the units used to measure the weight of the product. Default value is null. (optional)
-     * @param  string $item_dimensions_unit A string defining the units used to measure the dimensions of the product. Default value is null. (optional)
-     * @param  bool $is_personalizable When true, this listing is personalizable. The default value is null. (optional)
-     * @param  int[] $image_ids An array of numeric image IDs of the images in a listing, which can include up to 10 images. (optional)
-     * @param  bool $is_supply When true, tags the listing as a supply product. Helps buyers locate the listing under the Supplies heading. (optional)
-     * @param  bool $is_customizable When true, a buyer may contact the seller for a customized order. The default value is true when a shop accepts custom orders. Does not apply to shops that do not accept custom orders. (optional)
-     * @param  bool $is_taxable When true, applicable [shop](/documentation/reference#tag/Shop) tax rates apply to this listing at checkout. (optional)
-     * @param  bool $is_private When true, this is a private listing intendend for a specific buyer and hidden from shop view. (optional)
+     * @param  \EtsyApi\Model\ShopListingRequest $shop_listing_request (optional)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function createDraftListingRequest($shop_id, $quantity, $title, $description, $price, $who_made, $when_made, $taxonomy_id, $shipping_profile_id, $materials = null, $shop_section_id = null, $processing_min = null, $processing_max = null, $tags = null, $recipient = null, $occasion = null, $styles = null, $item_weight = null, $item_length = null, $item_width = null, $item_height = null, $item_weight_unit = null, $item_dimensions_unit = null, $is_personalizable = null, $image_ids = null, $is_supply = null, $is_customizable = null, $is_taxable = null, $is_private = null)
+    public function createDraftListingRequest($shop_id, $shop_listing_request = null)
     {
         // verify the required parameter 'shop_id' is set
         if ($shop_id === null || (is_array($shop_id) && count($shop_id) === 0)) {
@@ -523,105 +388,6 @@ class ShopListingApi
         }
         if ($shop_id < 1) {
             throw new \InvalidArgumentException('invalid value for "$shop_id" when calling ShopListingApi.createDraftListing, must be bigger than or equal to 1.');
-        }
-
-        // verify the required parameter 'quantity' is set
-        if ($quantity === null || (is_array($quantity) && count($quantity) === 0)) {
-            throw new \InvalidArgumentException(
-                'Missing the required parameter $quantity when calling createDraftListing'
-            );
-        }
-        // verify the required parameter 'title' is set
-        if ($title === null || (is_array($title) && count($title) === 0)) {
-            throw new \InvalidArgumentException(
-                'Missing the required parameter $title when calling createDraftListing'
-            );
-        }
-        // verify the required parameter 'description' is set
-        if ($description === null || (is_array($description) && count($description) === 0)) {
-            throw new \InvalidArgumentException(
-                'Missing the required parameter $description when calling createDraftListing'
-            );
-        }
-        // verify the required parameter 'price' is set
-        if ($price === null || (is_array($price) && count($price) === 0)) {
-            throw new \InvalidArgumentException(
-                'Missing the required parameter $price when calling createDraftListing'
-            );
-        }
-        if ($price > 50000) {
-            throw new \InvalidArgumentException('invalid value for "$price" when calling ShopListingApi.createDraftListing, must be smaller than or equal to 50000.');
-        }
-        if ($price < 0.2) {
-            throw new \InvalidArgumentException('invalid value for "$price" when calling ShopListingApi.createDraftListing, must be bigger than or equal to 0.2.');
-        }
-
-        // verify the required parameter 'who_made' is set
-        if ($who_made === null || (is_array($who_made) && count($who_made) === 0)) {
-            throw new \InvalidArgumentException(
-                'Missing the required parameter $who_made when calling createDraftListing'
-            );
-        }
-        // verify the required parameter 'when_made' is set
-        if ($when_made === null || (is_array($when_made) && count($when_made) === 0)) {
-            throw new \InvalidArgumentException(
-                'Missing the required parameter $when_made when calling createDraftListing'
-            );
-        }
-        // verify the required parameter 'taxonomy_id' is set
-        if ($taxonomy_id === null || (is_array($taxonomy_id) && count($taxonomy_id) === 0)) {
-            throw new \InvalidArgumentException(
-                'Missing the required parameter $taxonomy_id when calling createDraftListing'
-            );
-        }
-        if ($taxonomy_id < 1) {
-            throw new \InvalidArgumentException('invalid value for "$taxonomy_id" when calling ShopListingApi.createDraftListing, must be bigger than or equal to 1.');
-        }
-
-        // verify the required parameter 'shipping_profile_id' is set
-        if ($shipping_profile_id === null || (is_array($shipping_profile_id) && count($shipping_profile_id) === 0)) {
-            throw new \InvalidArgumentException(
-                'Missing the required parameter $shipping_profile_id when calling createDraftListing'
-            );
-        }
-        if ($shipping_profile_id < 1) {
-            throw new \InvalidArgumentException('invalid value for "$shipping_profile_id" when calling ShopListingApi.createDraftListing, must be bigger than or equal to 1.');
-        }
-
-        if ($shop_section_id !== null && $shop_section_id < 1) {
-            throw new \InvalidArgumentException('invalid value for "$shop_section_id" when calling ShopListingApi.createDraftListing, must be bigger than or equal to 1.');
-        }
-
-        if ($item_weight !== null && $item_weight > 1.79769313486E+308) {
-            throw new \InvalidArgumentException('invalid value for "$item_weight" when calling ShopListingApi.createDraftListing, must be smaller than or equal to 1.79769313486E+308.');
-        }
-        if ($item_weight !== null && $item_weight < 0) {
-            throw new \InvalidArgumentException('invalid value for "$item_weight" when calling ShopListingApi.createDraftListing, must be bigger than or equal to 0.');
-        }
-
-        if ($item_length !== null && $item_length > 1.79769313486E+308) {
-            throw new \InvalidArgumentException('invalid value for "$item_length" when calling ShopListingApi.createDraftListing, must be smaller than or equal to 1.79769313486E+308.');
-        }
-        if ($item_length !== null && $item_length < 0) {
-            throw new \InvalidArgumentException('invalid value for "$item_length" when calling ShopListingApi.createDraftListing, must be bigger than or equal to 0.');
-        }
-
-        if ($item_width !== null && $item_width > 1.79769313486E+308) {
-            throw new \InvalidArgumentException('invalid value for "$item_width" when calling ShopListingApi.createDraftListing, must be smaller than or equal to 1.79769313486E+308.');
-        }
-        if ($item_width !== null && $item_width < 0) {
-            throw new \InvalidArgumentException('invalid value for "$item_width" when calling ShopListingApi.createDraftListing, must be bigger than or equal to 0.');
-        }
-
-        if ($item_height !== null && $item_height > 1.79769313486E+308) {
-            throw new \InvalidArgumentException('invalid value for "$item_height" when calling ShopListingApi.createDraftListing, must be smaller than or equal to 1.79769313486E+308.');
-        }
-        if ($item_height !== null && $item_height < 0) {
-            throw new \InvalidArgumentException('invalid value for "$item_height" when calling ShopListingApi.createDraftListing, must be bigger than or equal to 0.');
-        }
-
-        if ($image_ids !== null && $image_ids < 1) {
-            throw new \InvalidArgumentException('invalid value for "$image_ids" when calling ShopListingApi.createDraftListing, must be bigger than or equal to 1.');
         }
 
 
@@ -643,118 +409,6 @@ class ShopListingApi
             );
         }
 
-        // form params
-        if ($quantity !== null) {
-            $formParams['quantity'] = ObjectSerializer::toFormValue($quantity);
-        }
-        // form params
-        if ($title !== null) {
-            $formParams['title'] = ObjectSerializer::toFormValue($title);
-        }
-        // form params
-        if ($description !== null) {
-            $formParams['description'] = ObjectSerializer::toFormValue($description);
-        }
-        // form params
-        if ($price !== null) {
-            $formParams['price'] = ObjectSerializer::toFormValue($price);
-        }
-        // form params
-        if ($who_made !== null) {
-            $formParams['who_made'] = ObjectSerializer::toFormValue($who_made);
-        }
-        // form params
-        if ($when_made !== null) {
-            $formParams['when_made'] = ObjectSerializer::toFormValue($when_made);
-        }
-        // form params
-        if ($taxonomy_id !== null) {
-            $formParams['taxonomy_id'] = ObjectSerializer::toFormValue($taxonomy_id);
-        }
-        // form params
-        if ($shipping_profile_id !== null) {
-            $formParams['shipping_profile_id'] = ObjectSerializer::toFormValue($shipping_profile_id);
-        }
-        // form params
-        if ($materials !== null) {
-            $formParams['materials'] = ObjectSerializer::toFormValue($materials);
-        }
-        // form params
-        if ($shop_section_id !== null) {
-            $formParams['shop_section_id'] = ObjectSerializer::toFormValue($shop_section_id);
-        }
-        // form params
-        if ($processing_min !== null) {
-            $formParams['processing_min'] = ObjectSerializer::toFormValue($processing_min);
-        }
-        // form params
-        if ($processing_max !== null) {
-            $formParams['processing_max'] = ObjectSerializer::toFormValue($processing_max);
-        }
-        // form params
-        if ($tags !== null) {
-            $formParams['tags'] = ObjectSerializer::toFormValue($tags);
-        }
-        // form params
-        if ($recipient !== null) {
-            $formParams['recipient'] = ObjectSerializer::toFormValue($recipient);
-        }
-        // form params
-        if ($occasion !== null) {
-            $formParams['occasion'] = ObjectSerializer::toFormValue($occasion);
-        }
-        // form params
-        if ($styles !== null) {
-            $formParams['styles'] = ObjectSerializer::toFormValue($styles);
-        }
-        // form params
-        if ($item_weight !== null) {
-            $formParams['item_weight'] = ObjectSerializer::toFormValue($item_weight);
-        }
-        // form params
-        if ($item_length !== null) {
-            $formParams['item_length'] = ObjectSerializer::toFormValue($item_length);
-        }
-        // form params
-        if ($item_width !== null) {
-            $formParams['item_width'] = ObjectSerializer::toFormValue($item_width);
-        }
-        // form params
-        if ($item_height !== null) {
-            $formParams['item_height'] = ObjectSerializer::toFormValue($item_height);
-        }
-        // form params
-        if ($item_weight_unit !== null) {
-            $formParams['item_weight_unit'] = ObjectSerializer::toFormValue($item_weight_unit);
-        }
-        // form params
-        if ($item_dimensions_unit !== null) {
-            $formParams['item_dimensions_unit'] = ObjectSerializer::toFormValue($item_dimensions_unit);
-        }
-        // form params
-        if ($is_personalizable !== null) {
-            $formParams['is_personalizable'] = ObjectSerializer::toFormValue($is_personalizable);
-        }
-        // form params
-        if ($image_ids !== null) {
-            $formParams['image_ids'] = ObjectSerializer::toFormValue($image_ids);
-        }
-        // form params
-        if ($is_supply !== null) {
-            $formParams['is_supply'] = ObjectSerializer::toFormValue($is_supply);
-        }
-        // form params
-        if ($is_customizable !== null) {
-            $formParams['is_customizable'] = ObjectSerializer::toFormValue($is_customizable);
-        }
-        // form params
-        if ($is_taxable !== null) {
-            $formParams['is_taxable'] = ObjectSerializer::toFormValue($is_taxable);
-        }
-        // form params
-        if ($is_private !== null) {
-            $formParams['is_private'] = ObjectSerializer::toFormValue($is_private);
-        }
 
         if ($multipart) {
             $headers = $this->headerSelector->selectHeadersForMultipart(
@@ -763,12 +417,18 @@ class ShopListingApi
         } else {
             $headers = $this->headerSelector->selectHeaders(
                 ['application/json'],
-                ['application/x-www-form-urlencoded']
+                ['application/json']
             );
         }
 
         // for model (json/xml)
-        if (count($formParams) > 0) {
+        if (isset($shop_listing_request)) {
+            if ($headers['Content-Type'] === 'application/json') {
+                $httpBody = \GuzzleHttp\json_encode(ObjectSerializer::sanitizeForSerialization($shop_listing_request));
+            } else {
+                $httpBody = $shop_listing_request;
+            }
+        } elseif (count($formParams) > 0) {
             if ($multipart) {
                 $multipartContents = [];
                 foreach ($formParams as $formParamName => $formParamValue) {

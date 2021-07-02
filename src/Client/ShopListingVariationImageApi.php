@@ -475,15 +475,15 @@ class ShopListingVariationImageApi
      *
      * @param  int $shop_id The unique positive non-zero numeric ID for an Etsy Shop. (required)
      * @param  int $listing_id The unique numeric ID for a listing in a specific [shop](/documentation/reference#tag/Shop). (required)
-     * @param  \EtsyApi\Model\InlineObject14 $inline_object14 inline_object14 (optional)
+     * @param  \EtsyApi\Model\ListingVariationImagesRequest $listing_variation_images_request listing_variation_images_request (optional)
      *
      * @throws \EtsyApi\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return \EtsyApi\Model\ListingVariationImages|\EtsyApi\Model\ErrorSchema|\EtsyApi\Model\ErrorSchema|\EtsyApi\Model\ErrorSchema|\EtsyApi\Model\ErrorSchema|\EtsyApi\Model\ErrorSchema
      */
-    public function updateVariationImages($shop_id, $listing_id, $inline_object14 = null)
+    public function updateVariationImages($shop_id, $listing_id, $listing_variation_images_request = null)
     {
-        list($response) = $this->updateVariationImagesWithHttpInfo($shop_id, $listing_id, $inline_object14);
+        list($response) = $this->updateVariationImagesWithHttpInfo($shop_id, $listing_id, $listing_variation_images_request);
         return $response;
     }
 
@@ -492,15 +492,15 @@ class ShopListingVariationImageApi
      *
      * @param  int $shop_id The unique positive non-zero numeric ID for an Etsy Shop. (required)
      * @param  int $listing_id The unique numeric ID for a listing in a specific [shop](/documentation/reference#tag/Shop). (required)
-     * @param  \EtsyApi\Model\InlineObject14 $inline_object14 (optional)
+     * @param  \EtsyApi\Model\ListingVariationImagesRequest $listing_variation_images_request (optional)
      *
      * @throws \EtsyApi\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return array of \EtsyApi\Model\ListingVariationImages|\EtsyApi\Model\ErrorSchema|\EtsyApi\Model\ErrorSchema|\EtsyApi\Model\ErrorSchema|\EtsyApi\Model\ErrorSchema|\EtsyApi\Model\ErrorSchema, HTTP status code, HTTP response headers (array of strings)
      */
-    public function updateVariationImagesWithHttpInfo($shop_id, $listing_id, $inline_object14 = null)
+    public function updateVariationImagesWithHttpInfo($shop_id, $listing_id, $listing_variation_images_request = null)
     {
-        $request = $this->updateVariationImagesRequest($shop_id, $listing_id, $inline_object14);
+        $request = $this->updateVariationImagesRequest($shop_id, $listing_id, $listing_variation_images_request);
 
         try {
             $options = $this->createHttpClientOption();
@@ -682,14 +682,14 @@ class ShopListingVariationImageApi
      *
      * @param  int $shop_id The unique positive non-zero numeric ID for an Etsy Shop. (required)
      * @param  int $listing_id The unique numeric ID for a listing in a specific [shop](/documentation/reference#tag/Shop). (required)
-     * @param  \EtsyApi\Model\InlineObject14 $inline_object14 (optional)
+     * @param  \EtsyApi\Model\ListingVariationImagesRequest $listing_variation_images_request (optional)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function updateVariationImagesAsync($shop_id, $listing_id, $inline_object14 = null)
+    public function updateVariationImagesAsync($shop_id, $listing_id, $listing_variation_images_request = null)
     {
-        return $this->updateVariationImagesAsyncWithHttpInfo($shop_id, $listing_id, $inline_object14)
+        return $this->updateVariationImagesAsyncWithHttpInfo($shop_id, $listing_id, $listing_variation_images_request)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -704,15 +704,15 @@ class ShopListingVariationImageApi
      *
      * @param  int $shop_id The unique positive non-zero numeric ID for an Etsy Shop. (required)
      * @param  int $listing_id The unique numeric ID for a listing in a specific [shop](/documentation/reference#tag/Shop). (required)
-     * @param  \EtsyApi\Model\InlineObject14 $inline_object14 (optional)
+     * @param  \EtsyApi\Model\ListingVariationImagesRequest $listing_variation_images_request (optional)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function updateVariationImagesAsyncWithHttpInfo($shop_id, $listing_id, $inline_object14 = null)
+    public function updateVariationImagesAsyncWithHttpInfo($shop_id, $listing_id, $listing_variation_images_request = null)
     {
         $returnType = '\EtsyApi\Model\ListingVariationImages';
-        $request = $this->updateVariationImagesRequest($shop_id, $listing_id, $inline_object14);
+        $request = $this->updateVariationImagesRequest($shop_id, $listing_id, $listing_variation_images_request);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -753,12 +753,12 @@ class ShopListingVariationImageApi
      *
      * @param  int $shop_id The unique positive non-zero numeric ID for an Etsy Shop. (required)
      * @param  int $listing_id The unique numeric ID for a listing in a specific [shop](/documentation/reference#tag/Shop). (required)
-     * @param  \EtsyApi\Model\InlineObject14 $inline_object14 (optional)
+     * @param  \EtsyApi\Model\ListingVariationImagesRequest $listing_variation_images_request (optional)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function updateVariationImagesRequest($shop_id, $listing_id, $inline_object14 = null)
+    public function updateVariationImagesRequest($shop_id, $listing_id, $listing_variation_images_request = null)
     {
         // verify the required parameter 'shop_id' is set
         if ($shop_id === null || (is_array($shop_id) && count($shop_id) === 0)) {
@@ -820,11 +820,11 @@ class ShopListingVariationImageApi
         }
 
         // for model (json/xml)
-        if (isset($inline_object14)) {
+        if (isset($listing_variation_images_request)) {
             if ($headers['Content-Type'] === 'application/json') {
-                $httpBody = \GuzzleHttp\json_encode(ObjectSerializer::sanitizeForSerialization($inline_object14));
+                $httpBody = \GuzzleHttp\json_encode(ObjectSerializer::sanitizeForSerialization($listing_variation_images_request));
             } else {
-                $httpBody = $inline_object14;
+                $httpBody = $listing_variation_images_request;
             }
         } elseif (count($formParams) > 0) {
             if ($multipart) {

@@ -144,271 +144,9 @@
                 ],
                 "requestBody": {
                     "content": {
-                        "application/x-www-form-urlencoded": {
+                        "application/json": {
                             "schema": {
-                                "type": "object",
-                                "required": [
-                                    "quantity",
-                                    "title",
-                                    "description",
-                                    "price",
-                                    "who_made",
-                                    "when_made",
-                                    "taxonomy_id",
-                                    "shipping_profile_id"
-                                ],
-                                "properties": {
-                                    "quantity": {
-                                        "type": "integer",
-                                        "description": "The positive non-zero number of products available for purchase in the listing. Note: The listing quantity is the sum of available offering quantities. You can request the quantities for individual offerings from the ListingInventory resource using the [getListingInventory](/documentation/reference#operation/getListingInventory) endpoint."
-                                    },
-                                    "title": {
-                                        "type": "string",
-                                        "description": "The listing's title string. Valid title strings contain only letters, numbers, punctuation marks, mathematical symbols, whitespace characters, ™, ©, and ®. (regex: /[^\\p{L}\\p{Nd}\\p{P}\\p{Sm}\\p{Zs}™©®]/u) You can only use the %, :, & and + characters once each."
-                                    },
-                                    "description": {
-                                        "type": "string",
-                                        "description": "A description string of the product for sale in the listing."
-                                    },
-                                    "price": {
-                                        "type": "number",
-                                        "description": "The positive non-zero price of the product. (Sold product listings are private) Note: The price is the minimum possible price. The getInventory method requests exact prices for available offerings.",
-                                        "format": "float",
-                                        "minimum": 0.2,
-                                        "maximum": 50000
-                                    },
-                                    "who_made": {
-                                        "type": "string",
-                                        "description": "An enumerated string inidcated who made the product. Helps buyers locate the listing under the Handmade heading.",
-                                        "enum": [
-                                            "i_did",
-                                            "someone_else",
-                                            "collective"
-                                        ]
-                                    },
-                                    "when_made": {
-                                        "type": "string",
-                                        "description": "An enumerated string for the era in which the maker made the product in this listing. Helps buyers locate the listing under the Vintage heading.",
-                                        "enum": [
-                                            "made_to_order",
-                                            "2020_2021",
-                                            "2010_2019",
-                                            "2002_2009",
-                                            "before_2002",
-                                            "2000_2001",
-                                            "1990s",
-                                            "1980s",
-                                            "1970s",
-                                            "1960s",
-                                            "1950s",
-                                            "1940s",
-                                            "1930s",
-                                            "1920s",
-                                            "1910s",
-                                            "1900s",
-                                            "1800s",
-                                            "1700s",
-                                            "before_1700"
-                                        ]
-                                    },
-                                    "taxonomy_id": {
-                                        "type": "integer",
-                                        "description": "The numeric taxonomy ID of the listing. The seller manages listing taxonomy IDs for their shop.  [See SellerTaxonomy](/documentation/reference#tag/SellerTaxonomy) for more information.",
-                                        "minimum": 1
-                                    },
-                                    "shipping_profile_id": {
-                                        "type": "integer",
-                                        "description": "The numeric ID of the [shipping profile](/documentation/reference#tag/ShopListing-ShippingProfile) associated with the listing.",
-                                        "minimum": 1
-                                    },
-                                    "materials": {
-                                        "type": "array",
-                                        "description": "A list of material strings for materials used in the product. Valid materials strings contain only letters, numbers, and whitespace characters. (regex: /[^\\p{L}\\p{Nd}\\p{Zs}]/u) Default value is null.",
-                                        "nullable": true,
-                                        "items": {
-                                            "type": "string",
-                                            "nullable": true
-                                        }
-                                    },
-                                    "shop_section_id": {
-                                        "type": "integer",
-                                        "description": "The numeric ID of the [shop section](/documentation/reference#tag/Shop-Section) for this listing. Default value is null.",
-                                        "nullable": true,
-                                        "minimum": 1
-                                    },
-                                    "processing_min": {
-                                        "type": "integer",
-                                        "description": "The minimum number of days required to process this listing. Default value is null.",
-                                        "nullable": true
-                                    },
-                                    "processing_max": {
-                                        "type": "integer",
-                                        "description": "The maximum number of days required to process this listing. Default value is null.",
-                                        "nullable": true
-                                    },
-                                    "tags": {
-                                        "type": "array",
-                                        "description": "A list of tag strings for the listing. Valid tag strings contain only letters, numbers, whitespace characters, -, ', ™, ©, and ®. (regex: /[^\\p{L}\\p{Nd}\\p{Zs}\\-'™©®]/u) Default value is null.",
-                                        "nullable": true,
-                                        "items": {
-                                            "type": "string",
-                                            "nullable": true
-                                        }
-                                    },
-                                    "recipient": {
-                                        "type": "string",
-                                        "description": "An enumerated string indicating a person for whom this product would make an appropriate gift. Default value is null.",
-                                        "nullable": true,
-                                        "enum": [
-                                            "men",
-                                            "women",
-                                            "unisex_adults",
-                                            "teen_boys",
-                                            "teen_girls",
-                                            "teens",
-                                            "boys",
-                                            "girls",
-                                            "children",
-                                            "baby_boys",
-                                            "baby_girls",
-                                            "babies",
-                                            "birds",
-                                            "cats",
-                                            "dogs",
-                                            "pets",
-                                            "not_specified"
-                                        ]
-                                    },
-                                    "occasion": {
-                                        "type": "string",
-                                        "description": "An enumerated string indicating an occassion for which this product would make an appropriate gift. Default value is null.",
-                                        "nullable": true,
-                                        "enum": [
-                                            "anniversary",
-                                            "baptism",
-                                            "bar_or_bat_mitzvah",
-                                            "birthday",
-                                            "canada_day",
-                                            "chinese_new_year",
-                                            "cinco_de_mayo",
-                                            "confirmation",
-                                            "christmas",
-                                            "day_of_the_dead",
-                                            "easter",
-                                            "eid",
-                                            "engagement",
-                                            "fathers_day",
-                                            "get_well",
-                                            "graduation",
-                                            "halloween",
-                                            "hanukkah",
-                                            "housewarming",
-                                            "kwanzaa",
-                                            "prom",
-                                            "july_4th",
-                                            "mothers_day",
-                                            "new_baby",
-                                            "new_years",
-                                            "quinceanera",
-                                            "retirement",
-                                            "st_patricks_day",
-                                            "sweet_16",
-                                            "sympathy",
-                                            "thanksgiving",
-                                            "valentines",
-                                            "wedding"
-                                        ]
-                                    },
-                                    "styles": {
-                                        "type": "array",
-                                        "description": "An array of style strings for this listing, each of which is free-form text string such as \"Formal\", or \"Steampunk\". A Listing may have up to two styles. Valid style strings contain only letters, numbers, and whitespace characters. (regex: /[^\\p{L}\\p{Nd}\\p{Zs}]/u) Default value is null.",
-                                        "nullable": true,
-                                        "items": {
-                                            "type": "string",
-                                            "nullable": true
-                                        }
-                                    },
-                                    "item_weight": {
-                                        "type": "number",
-                                        "description": "The numeric weight of the product measured in units set in 'item_weight_unit'. Default value is null.",
-                                        "format": "float",
-                                        "nullable": true,
-                                        "minimum": 0,
-                                        "maximum": 1.79769313486e308
-                                    },
-                                    "item_length": {
-                                        "type": "number",
-                                        "description": "The numeric length of the product measured in units set in 'item_dimensions_unit'. Default value is null.",
-                                        "format": "float",
-                                        "nullable": true,
-                                        "minimum": 0,
-                                        "maximum": 1.79769313486e308
-                                    },
-                                    "item_width": {
-                                        "type": "number",
-                                        "description": "The numeric width of the product measured in units set in 'item_dimensions_unit'. Default value is null.",
-                                        "format": "float",
-                                        "nullable": true,
-                                        "minimum": 0,
-                                        "maximum": 1.79769313486e308
-                                    },
-                                    "item_height": {
-                                        "type": "number",
-                                        "description": "The numeric height of the product measured in units set in 'item_dimensions_unit'. Default value is null.",
-                                        "format": "float",
-                                        "nullable": true,
-                                        "minimum": 0,
-                                        "maximum": 1.79769313486e308
-                                    },
-                                    "item_weight_unit": {
-                                        "type": "string",
-                                        "description": "A string defining the units used to measure the weight of the product. Default value is null.",
-                                        "nullable": true,
-                                        "enum": ["oz", "lb", "g", "kg"]
-                                    },
-                                    "item_dimensions_unit": {
-                                        "type": "string",
-                                        "description": "A string defining the units used to measure the dimensions of the product. Default value is null.",
-                                        "nullable": true,
-                                        "enum": [
-                                            "in",
-                                            "ft",
-                                            "mm",
-                                            "cm",
-                                            "m",
-                                            "yd",
-                                            "inches"
-                                        ]
-                                    },
-                                    "is_personalizable": {
-                                        "type": "boolean",
-                                        "description": "When true, this listing is personalizable. The default value is null."
-                                    },
-                                    "image_ids": {
-                                        "type": "array",
-                                        "description": "An array of numeric image IDs of the images in a listing, which can include up to 10 images.",
-                                        "items": {
-                                            "type": "integer",
-                                            "minimum": 1
-                                        }
-                                    },
-                                    "is_supply": {
-                                        "type": "boolean",
-                                        "description": "When true, tags the listing as a supply product. Helps buyers locate the listing under the Supplies heading."
-                                    },
-                                    "is_customizable": {
-                                        "type": "boolean",
-                                        "description": "When true, a buyer may contact the seller for a customized order. The default value is true when a shop accepts custom orders. Does not apply to shops that do not accept custom orders."
-                                    },
-                                    "is_taxable": {
-                                        "type": "boolean",
-                                        "description": "When true, applicable [shop](/documentation/reference#tag/Shop) tax rates apply to this listing at checkout."
-                                    },
-                                    "is_private": {
-                                        "type": "boolean",
-                                        "description": "When true, this is a private listing intendend for a specific buyer and hidden from shop view."
-                                    }
-                                }
+                                "$ref": "#/components/schemas/ShopListingRequest"
                             }
                         }
                     }
@@ -1876,96 +1614,7 @@
                     "content": {
                         "application/json": {
                             "schema": {
-                                "type": "object",
-                                "required": ["products"],
-                                "properties": {
-                                    "products": {
-                                        "type": "array",
-                                        "description": "A JSON array of products available in a listing, even if only one product. All field names in the JSON blobs are lowercase.",
-                                        "items": {
-                                            "type": "object",
-                                            "properties": {
-                                                "sku": {
-                                                    "type": "string",
-                                                    "nullable": true
-                                                },
-                                                "property_values": {
-                                                    "type": "array",
-                                                    "items": {
-                                                        "type": "object",
-                                                        "properties": {
-                                                            "property_id": {
-                                                                "type": "integer",
-                                                                "minimum": 1
-                                                            },
-                                                            "value_ids": {
-                                                                "type": "array",
-                                                                "items": {
-                                                                    "type": "integer",
-                                                                    "minimum": 1
-                                                                }
-                                                            },
-                                                            "scale_id": {
-                                                                "type": "integer",
-                                                                "nullable": true,
-                                                                "minimum": 1
-                                                            },
-                                                            "property_name": {
-                                                                "type": "string",
-                                                                "nullable": true
-                                                            },
-                                                            "values": {
-                                                                "type": "array",
-                                                                "items": {
-                                                                    "type": "string"
-                                                                }
-                                                            }
-                                                        }
-                                                    }
-                                                },
-                                                "offerings": {
-                                                    "type": "array",
-                                                    "items": {
-                                                        "type": "object",
-                                                        "properties": {
-                                                            "price": {
-                                                                "type": "number",
-                                                                "format": "float"
-                                                            },
-                                                            "quantity": {
-                                                                "type": "integer"
-                                                            },
-                                                            "is_enabled": {
-                                                                "type": "boolean"
-                                                            }
-                                                        }
-                                                    }
-                                                }
-                                            }
-                                        }
-                                    },
-                                    "price_on_property": {
-                                        "type": "array",
-                                        "description": "An array of unique [listing property](/documentation/reference#operation/getListingProperties) ID integers for the properties that change product prices, if any. For example, if you charge specific prices for different sized products in the same listing, then this array contains the property ID for size.",
-                                        "items": {
-                                            "type": "integer"
-                                        }
-                                    },
-                                    "quantity_on_property": {
-                                        "type": "array",
-                                        "description": "An array of unique [listing property](/documentation/reference#operation/getListingProperties) ID integers for the properties that change the quantity of the products, if any. For example, if you stock specific quantities of different colored products in the same listing, then this array contains the property ID for color.",
-                                        "items": {
-                                            "type": "integer"
-                                        }
-                                    },
-                                    "sku_on_property": {
-                                        "type": "array",
-                                        "description": "An array of unique [listing property](/documentation/reference#operation/getListingProperties) ID integers for the properties that change the product SKU, if any. For example, if you use specific skus for different colored products in the same listing, then this array contains the property ID for color.",
-                                        "items": {
-                                            "type": "integer"
-                                        }
-                                    }
-                                }
+                               "$ref" : "#/components/schemas/ListingInventoryRequest"
                             }
                         }
                     }
@@ -4925,7 +4574,7 @@
                                                 "sell_on_facebook"
                                             ]
                                         },
-                                        "default": "etsy.com"
+                                        "default": ["etsy.com"]
                                     }
                                 }
                             }
@@ -5096,31 +4745,7 @@
                     "content": {
                         "application/json": {
                             "schema": {
-                                "type": "object",
-                                "required": ["variation_images"],
-                                "properties": {
-                                    "variation_images": {
-                                        "type": "array",
-                                        "description": "A list of variation image data.",
-                                        "items": {
-                                            "type": "object",
-                                            "properties": {
-                                                "property_id": {
-                                                    "type": "integer",
-                                                    "minimum": 1
-                                                },
-                                                "value_id": {
-                                                    "type": "integer",
-                                                    "minimum": 1
-                                                },
-                                                "image_id": {
-                                                    "type": "integer",
-                                                    "minimum": 1
-                                                }
-                                            }
-                                        }
-                                    }
-                                }
+                               "$ref": "#/components/schemas/ListingVariationImagesRequest"
                             }
                         }
                     }
@@ -7786,6 +7411,272 @@
                     }
                 }
             },
+            "ShopListingRequest": {
+                "type": "object",
+                "description": "A listing from a shop, which contains a product quantity, title, description, price, etc.",
+                "required": [
+                    "quantity",
+                    "title",
+                    "description",
+                    "price",
+                    "who_made",
+                    "when_made",
+                    "taxonomy_id",
+                    "shipping_profile_id"
+                ],
+                "properties": {
+                    "quantity": {
+                        "type": "integer",
+                        "description": "The positive non-zero number of products available for purchase in the listing. Note: The listing quantity is the sum of available offering quantities. You can request the quantities for individual offerings from the ListingInventory resource using the [getListingInventory](/documentation/reference#operation/getListingInventory) endpoint."
+                    },
+                    "title": {
+                        "type": "string",
+                        "description": "The listing's title string. Valid title strings contain only letters, numbers, punctuation marks, mathematical symbols, whitespace characters, ™, ©, and ®. (regex: /[^\\p{L}\\p{Nd}\\p{P}\\p{Sm}\\p{Zs}™©®]/u) You can only use the %, :, & and + characters once each."
+                    },
+                    "description": {
+                        "type": "string",
+                        "description": "A description string of the product for sale in the listing."
+                    },
+                    "price": {
+                        "type": "number",
+                        "description": "The positive non-zero price of the product. (Sold product listings are private) Note: The price is the minimum possible price. The getInventory method requests exact prices for available offerings.",
+                        "format": "float",
+                        "minimum": 0.2,
+                        "maximum": 50000
+                    },
+                    "who_made": {
+                        "type": "string",
+                        "description": "An enumerated string inidcated who made the product. Helps buyers locate the listing under the Handmade heading.",
+                        "enum": [
+                            "i_did",
+                            "someone_else",
+                            "collective"
+                        ]
+                    },
+                    "when_made": {
+                        "type": "string",
+                        "description": "An enumerated string for the era in which the maker made the product in this listing. Helps buyers locate the listing under the Vintage heading.",
+                        "enum": [
+                            "made_to_order",
+                            "2020_2021",
+                            "2010_2019",
+                            "2002_2009",
+                            "before_2002",
+                            "2000_2001",
+                            "1990s",
+                            "1980s",
+                            "1970s",
+                            "1960s",
+                            "1950s",
+                            "1940s",
+                            "1930s",
+                            "1920s",
+                            "1910s",
+                            "1900s",
+                            "1800s",
+                            "1700s",
+                            "before_1700"
+                        ]
+                    },
+                    "taxonomy_id": {
+                        "type": "integer",
+                        "description": "The numeric taxonomy ID of the listing. The seller manages listing taxonomy IDs for their shop.  [See SellerTaxonomy](/documentation/reference#tag/SellerTaxonomy) for more information.",
+                        "minimum": 1
+                    },
+                    "shipping_profile_id": {
+                        "type": "integer",
+                        "description": "The numeric ID of the [shipping profile](/documentation/reference#tag/ShopListing-ShippingProfile) associated with the listing.",
+                        "minimum": 1
+                    },
+                    "materials": {
+                        "type": "array",
+                        "description": "A list of material strings for materials used in the product. Valid materials strings contain only letters, numbers, and whitespace characters. (regex: /[^\\p{L}\\p{Nd}\\p{Zs}]/u) Default value is null.",
+                        "nullable": true,
+                        "items": {
+                            "type": "string",
+                            "nullable": true
+                        }
+                    },
+                    "shop_section_id": {
+                        "type": "integer",
+                        "description": "The numeric ID of the [shop section](/documentation/reference#tag/Shop-Section) for this listing. Default value is null.",
+                        "nullable": true,
+                        "minimum": 1
+                    },
+                    "processing_min": {
+                        "type": "integer",
+                        "description": "The minimum number of days required to process this listing. Default value is null.",
+                        "nullable": true
+                    },
+                    "processing_max": {
+                        "type": "integer",
+                        "description": "The maximum number of days required to process this listing. Default value is null.",
+                        "nullable": true
+                    },
+                    "tags": {
+                        "type": "array",
+                        "description": "A list of tag strings for the listing. Valid tag strings contain only letters, numbers, whitespace characters, -, ', ™, ©, and ®. (regex: /[^\\p{L}\\p{Nd}\\p{Zs}\\-'™©®]/u) Default value is null.",
+                        "nullable": true,
+                        "items": {
+                            "type": "string",
+                            "nullable": true
+                        }
+                    },
+                    "recipient": {
+                        "type": "string",
+                        "description": "An enumerated string indicating a person for whom this product would make an appropriate gift. Default value is null.",
+                        "nullable": true,
+                        "enum": [
+                            "men",
+                            "women",
+                            "unisex_adults",
+                            "teen_boys",
+                            "teen_girls",
+                            "teens",
+                            "boys",
+                            "girls",
+                            "children",
+                            "baby_boys",
+                            "baby_girls",
+                            "babies",
+                            "birds",
+                            "cats",
+                            "dogs",
+                            "pets",
+                            "not_specified"
+                        ]
+                    },
+                    "occasion": {
+                        "type": "string",
+                        "description": "An enumerated string indicating an occassion for which this product would make an appropriate gift. Default value is null.",
+                        "nullable": true,
+                        "enum": [
+                            "anniversary",
+                            "baptism",
+                            "bar_or_bat_mitzvah",
+                            "birthday",
+                            "canada_day",
+                            "chinese_new_year",
+                            "cinco_de_mayo",
+                            "confirmation",
+                            "christmas",
+                            "day_of_the_dead",
+                            "easter",
+                            "eid",
+                            "engagement",
+                            "fathers_day",
+                            "get_well",
+                            "graduation",
+                            "halloween",
+                            "hanukkah",
+                            "housewarming",
+                            "kwanzaa",
+                            "prom",
+                            "july_4th",
+                            "mothers_day",
+                            "new_baby",
+                            "new_years",
+                            "quinceanera",
+                            "retirement",
+                            "st_patricks_day",
+                            "sweet_16",
+                            "sympathy",
+                            "thanksgiving",
+                            "valentines",
+                            "wedding"
+                        ]
+                    },
+                    "styles": {
+                        "type": "array",
+                        "description": "An array of style strings for this listing, each of which is free-form text string such as \"Formal\", or \"Steampunk\". A Listing may have up to two styles. Valid style strings contain only letters, numbers, and whitespace characters. (regex: /[^\\p{L}\\p{Nd}\\p{Zs}]/u) Default value is null.",
+                        "nullable": true,
+                        "items": {
+                            "type": "string",
+                            "nullable": true
+                        }
+                    },
+                    "item_weight": {
+                        "type": "number",
+                        "description": "The numeric weight of the product measured in units set in 'item_weight_unit'. Default value is null.",
+                        "format": "float",
+                        "nullable": true,
+                        "minimum": 0,
+                        "maximum": 1.79769313486e308
+                    },
+                    "item_length": {
+                        "type": "number",
+                        "description": "The numeric length of the product measured in units set in 'item_dimensions_unit'. Default value is null.",
+                        "format": "float",
+                        "nullable": true,
+                        "minimum": 0,
+                        "maximum": 1.79769313486e308
+                    },
+                    "item_width": {
+                        "type": "number",
+                        "description": "The numeric width of the product measured in units set in 'item_dimensions_unit'. Default value is null.",
+                        "format": "float",
+                        "nullable": true,
+                        "minimum": 0,
+                        "maximum": 1.79769313486e308
+                    },
+                    "item_height": {
+                        "type": "number",
+                        "description": "The numeric height of the product measured in units set in 'item_dimensions_unit'. Default value is null.",
+                        "format": "float",
+                        "nullable": true,
+                        "minimum": 0,
+                        "maximum": 1.79769313486e308
+                    },
+                    "item_weight_unit": {
+                        "type": "string",
+                        "description": "A string defining the units used to measure the weight of the product. Default value is null.",
+                        "nullable": true,
+                        "enum": ["oz", "lb", "g", "kg"]
+                    },
+                    "item_dimensions_unit": {
+                        "type": "string",
+                        "description": "A string defining the units used to measure the dimensions of the product. Default value is null.",
+                        "nullable": true,
+                        "enum": [
+                            "in",
+                            "ft",
+                            "mm",
+                            "cm",
+                            "m",
+                            "yd",
+                            "inches"
+                        ]
+                    },
+                    "is_personalizable": {
+                        "type": "boolean",
+                        "description": "When true, this listing is personalizable. The default value is null."
+                    },
+                    "image_ids": {
+                        "type": "array",
+                        "description": "An array of numeric image IDs of the images in a listing, which can include up to 10 images.",
+                        "items": {
+                            "type": "integer",
+                            "minimum": 1
+                        }
+                    },
+                    "is_supply": {
+                        "type": "boolean",
+                        "description": "When true, tags the listing as a supply product. Helps buyers locate the listing under the Supplies heading."
+                    },
+                    "is_customizable": {
+                        "type": "boolean",
+                        "description": "When true, a buyer may contact the seller for a customized order. The default value is true when a shop accepts custom orders. Does not apply to shops that do not accept custom orders."
+                    },
+                    "is_taxable": {
+                        "type": "boolean",
+                        "description": "When true, applicable [shop](/documentation/reference#tag/Shop) tax rates apply to this listing at checkout."
+                    },
+                    "is_private": {
+                        "type": "boolean",
+                        "description": "When true, this is a private listing intendend for a specific buyer and hidden from shop view."
+                    }
+                }
+            },
             "Money": {
                 "type": "object",
                 "description": "A representation of an amount of money.",
@@ -8080,6 +7971,98 @@
                                     "$ref": "#/components/schemas/ListingInventoryProduct"
                                 }
                             ]
+                        }
+                    },
+                    "price_on_property": {
+                        "type": "array",
+                        "description": "An array of unique [listing property](/documentation/reference#operation/getListingProperties) ID integers for the properties that change product prices, if any. For example, if you charge specific prices for different sized products in the same listing, then this array contains the property ID for size.",
+                        "items": {
+                            "type": "integer"
+                        }
+                    },
+                    "quantity_on_property": {
+                        "type": "array",
+                        "description": "An array of unique [listing property](/documentation/reference#operation/getListingProperties) ID integers for the properties that change the quantity of the products, if any. For example, if you stock specific quantities of different colored products in the same listing, then this array contains the property ID for color.",
+                        "items": {
+                            "type": "integer"
+                        }
+                    },
+                    "sku_on_property": {
+                        "type": "array",
+                        "description": "An array of unique [listing property](/documentation/reference#operation/getListingProperties) ID integers for the properties that change the product SKU, if any. For example, if you use specific skus for different colored products in the same listing, then this array contains the property ID for color.",
+                        "items": {
+                            "type": "integer"
+                        }
+                    }
+                }
+            },
+            "ListingInventoryRequest" : {
+                "type": "object",
+                "required": ["products"],
+                "properties": {
+                    "products": {
+                        "type": "array",
+                        "description": "A JSON array of products available in a listing, even if only one product. All field names in the JSON blobs are lowercase.",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "sku": {
+                                    "type": "string",
+                                    "nullable": true
+                                },
+                                "property_values": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "object",
+                                        "properties": {
+                                            "property_id": {
+                                                "type": "integer",
+                                                "minimum": 1
+                                            },
+                                            "value_ids": {
+                                                "type": "array",
+                                                "items": {
+                                                    "type": "integer",
+                                                    "minimum": 1
+                                                }
+                                            },
+                                            "scale_id": {
+                                                "type": "integer",
+                                                "nullable": true,
+                                                "minimum": 1
+                                            },
+                                            "property_name": {
+                                                "type": "string",
+                                                "nullable": true
+                                            },
+                                            "values": {
+                                                "type": "array",
+                                                "items": {
+                                                    "type": "string"
+                                                }
+                                            }
+                                        }
+                                    }
+                                },
+                                "offerings": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "object",
+                                        "properties": {
+                                            "price": {
+                                                "type": "number",
+                                                "format": "float"
+                                            },
+                                            "quantity": {
+                                                "type": "integer"
+                                            },
+                                            "is_enabled": {
+                                                "type": "boolean"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
                         }
                     },
                     "price_on_property": {
@@ -8867,6 +8850,33 @@
                                     "$ref": "#/components/schemas/ListingVariationImage"
                                 }
                             ]
+                        }
+                    }
+                }
+            },
+            "ListingVariationImagesRequest":  {
+                "type": "object",
+                "required": ["variation_images"],
+                "properties": {
+                    "variation_images": {
+                        "type": "array",
+                        "description": "A list of variation image data.",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "property_id": {
+                                    "type": "integer",
+                                    "minimum": 1
+                                },
+                                "value_id": {
+                                    "type": "integer",
+                                    "minimum": 1
+                                },
+                                "image_id": {
+                                    "type": "integer",
+                                    "minimum": 1
+                                }
+                            }
                         }
                     }
                 }
