@@ -4044,27 +4044,9 @@
                 ],
                 "requestBody": {
                     "content": {
-                        "application/x-www-form-urlencoded": {
+                        "application/json": {
                             "schema": {
-                                "type": "object",
-                                "required": ["title", "description"],
-                                "properties": {
-                                    "title": {
-                                        "type": "string",
-                                        "description": "The title of the Listing of this Translation."
-                                    },
-                                    "description": {
-                                        "type": "string",
-                                        "description": "The description of the Listing of this Translation."
-                                    },
-                                    "tags": {
-                                        "type": "array",
-                                        "description": "The tags of the Listing of this Translation.",
-                                        "items": {
-                                            "type": "string"
-                                        }
-                                    }
-                                }
+                                "$ref" : "#/components/schemas/ListingTranslationRequest"
                             }
                         }
                     }
@@ -4241,25 +4223,7 @@
                     "content": {
                         "application/x-www-form-urlencoded": {
                             "schema": {
-                                "type": "object",
-                                "required": ["title", "description"],
-                                "properties": {
-                                    "title": {
-                                        "type": "string",
-                                        "description": "The title of the Listing of this Translation."
-                                    },
-                                    "description": {
-                                        "type": "string",
-                                        "description": "The description of the Listing of this Translation."
-                                    },
-                                    "tags": {
-                                        "type": "array",
-                                        "description": "The tags of the Listing of this Translation.",
-                                        "items": {
-                                            "type": "string"
-                                        }
-                                    }
-                                }
+                                "$ref": "#/components/schemas/ListingTranslationRequest"
                             }
                         }
                     }
@@ -8826,6 +8790,28 @@
                         "type": "string",
                         "description": "The description of the Listing of this Translation.",
                         "nullable": true
+                    },
+                    "tags": {
+                        "type": "array",
+                        "description": "The tags of the Listing of this Translation.",
+                        "items": {
+                            "type": "string"
+                        }
+                    }
+                }
+            },
+            "ListingTranslationRequest":
+            {
+                "type": "object",
+                "required": ["title", "description"],
+                "properties": {
+                    "title": {
+                        "type": "string",
+                        "description": "The title of the Listing of this Translation."
+                    },
+                    "description": {
+                        "type": "string",
+                        "description": "The description of the Listing of this Translation."
                     },
                     "tags": {
                         "type": "array",
