@@ -1159,19 +1159,15 @@ class ShopListingImageApi
      *
      * @param  int $shop_id The unique positive non-zero numeric ID for an Etsy Shop. (required)
      * @param  int $listing_id The unique numeric ID for a listing in a specific [shop](/documentation/reference#tag/Shop). (required)
-     * @param  \SplFileObject $image The file name string of a file to upload (optional)
-     * @param  int $listing_image_id The unique numeric image ID of an image in a listing. (optional)
-     * @param  int $rank The positive non-zero numeric position in the images displayed in a listing, with rank 1 images appearing in the left-most position in a listing. (optional, default to 1)
-     * @param  bool $overwrite When true, this request replaces the existing image at a given rank. (optional, default to false)
-     * @param  bool $is_watermarked When true, indicates that the uploaded image has a watermark. (optional, default to false)
+     * @param  \EtsyApi\Model\ListingImageRequest $listing_image_request listing_image_request (optional)
      *
      * @throws \EtsyApi\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return \EtsyApi\Model\ListingImage|\EtsyApi\Model\ErrorSchema|\EtsyApi\Model\ErrorSchema|\EtsyApi\Model\ErrorSchema|\EtsyApi\Model\ErrorSchema|\EtsyApi\Model\ErrorSchema
      */
-    public function uploadListingImage($shop_id, $listing_id, $image = null, $listing_image_id = null, $rank = 1, $overwrite = false, $is_watermarked = false)
+    public function uploadListingImage($shop_id, $listing_id, $listing_image_request = null)
     {
-        list($response) = $this->uploadListingImageWithHttpInfo($shop_id, $listing_id, $image, $listing_image_id, $rank, $overwrite, $is_watermarked);
+        list($response) = $this->uploadListingImageWithHttpInfo($shop_id, $listing_id, $listing_image_request);
         return $response;
     }
 
@@ -1180,19 +1176,15 @@ class ShopListingImageApi
      *
      * @param  int $shop_id The unique positive non-zero numeric ID for an Etsy Shop. (required)
      * @param  int $listing_id The unique numeric ID for a listing in a specific [shop](/documentation/reference#tag/Shop). (required)
-     * @param  \SplFileObject $image The file name string of a file to upload (optional)
-     * @param  int $listing_image_id The unique numeric image ID of an image in a listing. (optional)
-     * @param  int $rank The positive non-zero numeric position in the images displayed in a listing, with rank 1 images appearing in the left-most position in a listing. (optional, default to 1)
-     * @param  bool $overwrite When true, this request replaces the existing image at a given rank. (optional, default to false)
-     * @param  bool $is_watermarked When true, indicates that the uploaded image has a watermark. (optional, default to false)
+     * @param  \EtsyApi\Model\ListingImageRequest $listing_image_request (optional)
      *
      * @throws \EtsyApi\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return array of \EtsyApi\Model\ListingImage|\EtsyApi\Model\ErrorSchema|\EtsyApi\Model\ErrorSchema|\EtsyApi\Model\ErrorSchema|\EtsyApi\Model\ErrorSchema|\EtsyApi\Model\ErrorSchema, HTTP status code, HTTP response headers (array of strings)
      */
-    public function uploadListingImageWithHttpInfo($shop_id, $listing_id, $image = null, $listing_image_id = null, $rank = 1, $overwrite = false, $is_watermarked = false)
+    public function uploadListingImageWithHttpInfo($shop_id, $listing_id, $listing_image_request = null)
     {
-        $request = $this->uploadListingImageRequest($shop_id, $listing_id, $image, $listing_image_id, $rank, $overwrite, $is_watermarked);
+        $request = $this->uploadListingImageRequest($shop_id, $listing_id, $listing_image_request);
 
         try {
             $options = $this->createHttpClientOption();
@@ -1374,18 +1366,14 @@ class ShopListingImageApi
      *
      * @param  int $shop_id The unique positive non-zero numeric ID for an Etsy Shop. (required)
      * @param  int $listing_id The unique numeric ID for a listing in a specific [shop](/documentation/reference#tag/Shop). (required)
-     * @param  \SplFileObject $image The file name string of a file to upload (optional)
-     * @param  int $listing_image_id The unique numeric image ID of an image in a listing. (optional)
-     * @param  int $rank The positive non-zero numeric position in the images displayed in a listing, with rank 1 images appearing in the left-most position in a listing. (optional, default to 1)
-     * @param  bool $overwrite When true, this request replaces the existing image at a given rank. (optional, default to false)
-     * @param  bool $is_watermarked When true, indicates that the uploaded image has a watermark. (optional, default to false)
+     * @param  \EtsyApi\Model\ListingImageRequest $listing_image_request (optional)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function uploadListingImageAsync($shop_id, $listing_id, $image = null, $listing_image_id = null, $rank = 1, $overwrite = false, $is_watermarked = false)
+    public function uploadListingImageAsync($shop_id, $listing_id, $listing_image_request = null)
     {
-        return $this->uploadListingImageAsyncWithHttpInfo($shop_id, $listing_id, $image, $listing_image_id, $rank, $overwrite, $is_watermarked)
+        return $this->uploadListingImageAsyncWithHttpInfo($shop_id, $listing_id, $listing_image_request)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -1400,19 +1388,15 @@ class ShopListingImageApi
      *
      * @param  int $shop_id The unique positive non-zero numeric ID for an Etsy Shop. (required)
      * @param  int $listing_id The unique numeric ID for a listing in a specific [shop](/documentation/reference#tag/Shop). (required)
-     * @param  \SplFileObject $image The file name string of a file to upload (optional)
-     * @param  int $listing_image_id The unique numeric image ID of an image in a listing. (optional)
-     * @param  int $rank The positive non-zero numeric position in the images displayed in a listing, with rank 1 images appearing in the left-most position in a listing. (optional, default to 1)
-     * @param  bool $overwrite When true, this request replaces the existing image at a given rank. (optional, default to false)
-     * @param  bool $is_watermarked When true, indicates that the uploaded image has a watermark. (optional, default to false)
+     * @param  \EtsyApi\Model\ListingImageRequest $listing_image_request (optional)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function uploadListingImageAsyncWithHttpInfo($shop_id, $listing_id, $image = null, $listing_image_id = null, $rank = 1, $overwrite = false, $is_watermarked = false)
+    public function uploadListingImageAsyncWithHttpInfo($shop_id, $listing_id, $listing_image_request = null)
     {
         $returnType = '\EtsyApi\Model\ListingImage';
-        $request = $this->uploadListingImageRequest($shop_id, $listing_id, $image, $listing_image_id, $rank, $overwrite, $is_watermarked);
+        $request = $this->uploadListingImageRequest($shop_id, $listing_id, $listing_image_request);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -1453,16 +1437,12 @@ class ShopListingImageApi
      *
      * @param  int $shop_id The unique positive non-zero numeric ID for an Etsy Shop. (required)
      * @param  int $listing_id The unique numeric ID for a listing in a specific [shop](/documentation/reference#tag/Shop). (required)
-     * @param  \SplFileObject $image The file name string of a file to upload (optional)
-     * @param  int $listing_image_id The unique numeric image ID of an image in a listing. (optional)
-     * @param  int $rank The positive non-zero numeric position in the images displayed in a listing, with rank 1 images appearing in the left-most position in a listing. (optional, default to 1)
-     * @param  bool $overwrite When true, this request replaces the existing image at a given rank. (optional, default to false)
-     * @param  bool $is_watermarked When true, indicates that the uploaded image has a watermark. (optional, default to false)
+     * @param  \EtsyApi\Model\ListingImageRequest $listing_image_request (optional)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function uploadListingImageRequest($shop_id, $listing_id, $image = null, $listing_image_id = null, $rank = 1, $overwrite = false, $is_watermarked = false)
+    public function uploadListingImageRequest($shop_id, $listing_id, $listing_image_request = null)
     {
         // verify the required parameter 'shop_id' is set
         if ($shop_id === null || (is_array($shop_id) && count($shop_id) === 0)) {
@@ -1482,14 +1462,6 @@ class ShopListingImageApi
         }
         if ($listing_id < 1) {
             throw new \InvalidArgumentException('invalid value for "$listing_id" when calling ShopListingImageApi.uploadListingImage, must be bigger than or equal to 1.');
-        }
-
-        if ($listing_image_id !== null && $listing_image_id < 1) {
-            throw new \InvalidArgumentException('invalid value for "$listing_image_id" when calling ShopListingImageApi.uploadListingImage, must be bigger than or equal to 1.');
-        }
-
-        if ($rank !== null && $rank < 0) {
-            throw new \InvalidArgumentException('invalid value for "$rank" when calling ShopListingImageApi.uploadListingImage, must be bigger than or equal to 0.');
         }
 
 
@@ -1519,34 +1491,6 @@ class ShopListingImageApi
             );
         }
 
-        // form params
-        if ($image !== null) {
-            $multipart = true;
-            $formParams['image'] = [];
-            $paramFiles = is_array($image) ? $image : [$image];
-            foreach ($paramFiles as $paramFile) {
-                $formParams['image'][] = \GuzzleHttp\Psr7\try_fopen(
-                    ObjectSerializer::toFormValue($paramFile),
-                    'rb'
-                );
-            }
-        }
-        // form params
-        if ($listing_image_id !== null) {
-            $formParams['listing_image_id'] = ObjectSerializer::toFormValue($listing_image_id);
-        }
-        // form params
-        if ($rank !== null) {
-            $formParams['rank'] = ObjectSerializer::toFormValue($rank);
-        }
-        // form params
-        if ($overwrite !== null) {
-            $formParams['overwrite'] = ObjectSerializer::toFormValue($overwrite);
-        }
-        // form params
-        if ($is_watermarked !== null) {
-            $formParams['is_watermarked'] = ObjectSerializer::toFormValue($is_watermarked);
-        }
 
         if ($multipart) {
             $headers = $this->headerSelector->selectHeadersForMultipart(
@@ -1555,12 +1499,18 @@ class ShopListingImageApi
         } else {
             $headers = $this->headerSelector->selectHeaders(
                 ['application/json'],
-                ['multipart/form-data']
+                ['application/json']
             );
         }
 
         // for model (json/xml)
-        if (count($formParams) > 0) {
+        if (isset($listing_image_request)) {
+            if ($headers['Content-Type'] === 'application/json') {
+                $httpBody = \GuzzleHttp\json_encode(ObjectSerializer::sanitizeForSerialization($listing_image_request));
+            } else {
+                $httpBody = $listing_image_request;
+            }
+        } elseif (count($formParams) > 0) {
             if ($multipart) {
                 $multipartContents = [];
                 foreach ($formParams as $formParamName => $formParamValue) {

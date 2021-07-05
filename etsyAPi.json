@@ -1421,37 +1421,9 @@
                 ],
                 "requestBody": {
                     "content": {
-                        "multipart/form-data": {
+                        "application/json": {
                             "schema": {
-                                "type": "object",
-                                "properties": {
-                                    "image": {
-                                        "type": "string",
-                                        "description": "The file name string of a file to upload",
-                                        "format": "binary"
-                                    },
-                                    "listing_image_id": {
-                                        "type": "integer",
-                                        "description": "The unique numeric image ID of an image in a listing.",
-                                        "minimum": 1
-                                    },
-                                    "rank": {
-                                        "type": "integer",
-                                        "description": "The positive non-zero numeric position in the images displayed in a listing, with rank 1 images appearing in the left-most position in a listing.",
-                                        "minimum": 0,
-                                        "default": 1
-                                    },
-                                    "overwrite": {
-                                        "type": "boolean",
-                                        "description": "When true, this request replaces the existing image at a given rank.",
-                                        "default": false
-                                    },
-                                    "is_watermarked": {
-                                        "type": "boolean",
-                                        "description": "When true, indicates that the uploaded image has a watermark.",
-                                        "default": false
-                                    }
-                                }
+                                "$ref": "#/components/schemas/ListingImageRequest"
                             }
                         }
                     }
@@ -7924,6 +7896,37 @@
                         "description": "The numeric width, measured in pixels, of the full-sized image referenced in url_fullxfull.",
                         "nullable": true,
                         "minimum": 0
+                    }
+                }
+            },
+            "ListingImageRequest": {
+                "type": "object",
+                "properties": {
+                    "image": {
+                        "type": "string",
+                        "description": "The file name string of a file to upload",
+                        "format": "binary"
+                    },
+                    "listing_image_id": {
+                        "type": "integer",
+                        "description": "The unique numeric image ID of an image in a listing.",
+                        "minimum": 1
+                    },
+                    "rank": {
+                        "type": "integer",
+                        "description": "The positive non-zero numeric position in the images displayed in a listing, with rank 1 images appearing in the left-most position in a listing.",
+                        "minimum": 0,
+                        "default": 1
+                    },
+                    "overwrite": {
+                        "type": "boolean",
+                        "description": "When true, this request replaces the existing image at a given rank.",
+                        "default": false
+                    },
+                    "is_watermarked": {
+                        "type": "boolean",
+                        "description": "When true, indicates that the uploaded image has a watermark.",
+                        "default": false
                     }
                 }
             },
