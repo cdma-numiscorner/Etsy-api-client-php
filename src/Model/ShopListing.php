@@ -101,7 +101,7 @@ class ShopListing implements ModelInterface, ArrayAccess, \JsonSerializable
         'has_variations' => 'bool',
         'should_auto_renew' => 'bool',
         'language' => 'string',
-        'price' => 'Money'
+        'price' => '\EtsyApi\Model\Money'
     ];
 
     /**
@@ -2050,7 +2050,7 @@ class ShopListing implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets price
      *
-     * @return Money
+     * @return \EtsyApi\Model\Money
      */
     public function getPrice()
     {
@@ -2060,7 +2060,7 @@ class ShopListing implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets price
      *
-     * @param Money $price The positive non-zero price of the product. (Sold product listings are private) Note: The price is the minimum possible price. The getInventory method requests exact prices for available offerings.
+     * @param \EtsyApi\Model\Money $price price
      *
      * @return self
      */

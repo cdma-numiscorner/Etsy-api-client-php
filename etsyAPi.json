@@ -7345,12 +7345,7 @@
                         "nullable": true
                     },
                     "price": {
-                        "description": "The positive non-zero price of the product. (Sold product listings are private) Note: The price is the minimum possible price. The getInventory method requests exact prices for available offerings.",
-                        "allOf": [
-                            {
-                                "$ref": "#/components/schemas/Money"
-                            }
-                        ]
+                        "$ref": "#/components/schemas/Money"
                     }
                 }
             },
