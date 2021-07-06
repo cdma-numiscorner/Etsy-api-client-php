@@ -121,15 +121,17 @@ class ShopListingTranslationApi
      * @param  int $shop_id The unique positive non-zero numeric ID for an Etsy Shop. (required)
      * @param  int $listing_id The unique numeric ID for a listing in a specific [shop](/documentation/reference#tag/Shop). (required)
      * @param  string $language The IETF language tag for the language of this translation. Ex: de, en, es, fr, it, ja, nl, pl, pt, ru. (required)
-     * @param  \EtsyApi\Model\ListingTranslationRequest $listing_translation_request listing_translation_request (optional)
+     * @param  string $title The title of the Listing of this Translation. (required)
+     * @param  string $description The description of the Listing of this Translation. (required)
+     * @param  string[] $tags The tags of the Listing of this Translation. (optional)
      *
      * @throws \EtsyApi\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return \EtsyApi\Model\ListingTranslation|\EtsyApi\Model\ErrorSchema|\EtsyApi\Model\ErrorSchema|\EtsyApi\Model\ErrorSchema
      */
-    public function createListingTranslation($shop_id, $listing_id, $language, $listing_translation_request = null)
+    public function createListingTranslation($shop_id, $listing_id, $language, $title, $description, $tags = null)
     {
-        list($response) = $this->createListingTranslationWithHttpInfo($shop_id, $listing_id, $language, $listing_translation_request);
+        list($response) = $this->createListingTranslationWithHttpInfo($shop_id, $listing_id, $language, $title, $description, $tags);
         return $response;
     }
 
@@ -139,15 +141,17 @@ class ShopListingTranslationApi
      * @param  int $shop_id The unique positive non-zero numeric ID for an Etsy Shop. (required)
      * @param  int $listing_id The unique numeric ID for a listing in a specific [shop](/documentation/reference#tag/Shop). (required)
      * @param  string $language The IETF language tag for the language of this translation. Ex: de, en, es, fr, it, ja, nl, pl, pt, ru. (required)
-     * @param  \EtsyApi\Model\ListingTranslationRequest $listing_translation_request (optional)
+     * @param  string $title The title of the Listing of this Translation. (required)
+     * @param  string $description The description of the Listing of this Translation. (required)
+     * @param  string[] $tags The tags of the Listing of this Translation. (optional)
      *
      * @throws \EtsyApi\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return array of \EtsyApi\Model\ListingTranslation|\EtsyApi\Model\ErrorSchema|\EtsyApi\Model\ErrorSchema|\EtsyApi\Model\ErrorSchema, HTTP status code, HTTP response headers (array of strings)
      */
-    public function createListingTranslationWithHttpInfo($shop_id, $listing_id, $language, $listing_translation_request = null)
+    public function createListingTranslationWithHttpInfo($shop_id, $listing_id, $language, $title, $description, $tags = null)
     {
-        $request = $this->createListingTranslationRequest($shop_id, $listing_id, $language, $listing_translation_request);
+        $request = $this->createListingTranslationRequest($shop_id, $listing_id, $language, $title, $description, $tags);
 
         try {
             $options = $this->createHttpClientOption();
@@ -290,14 +294,16 @@ class ShopListingTranslationApi
      * @param  int $shop_id The unique positive non-zero numeric ID for an Etsy Shop. (required)
      * @param  int $listing_id The unique numeric ID for a listing in a specific [shop](/documentation/reference#tag/Shop). (required)
      * @param  string $language The IETF language tag for the language of this translation. Ex: de, en, es, fr, it, ja, nl, pl, pt, ru. (required)
-     * @param  \EtsyApi\Model\ListingTranslationRequest $listing_translation_request (optional)
+     * @param  string $title The title of the Listing of this Translation. (required)
+     * @param  string $description The description of the Listing of this Translation. (required)
+     * @param  string[] $tags The tags of the Listing of this Translation. (optional)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function createListingTranslationAsync($shop_id, $listing_id, $language, $listing_translation_request = null)
+    public function createListingTranslationAsync($shop_id, $listing_id, $language, $title, $description, $tags = null)
     {
-        return $this->createListingTranslationAsyncWithHttpInfo($shop_id, $listing_id, $language, $listing_translation_request)
+        return $this->createListingTranslationAsyncWithHttpInfo($shop_id, $listing_id, $language, $title, $description, $tags)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -313,15 +319,17 @@ class ShopListingTranslationApi
      * @param  int $shop_id The unique positive non-zero numeric ID for an Etsy Shop. (required)
      * @param  int $listing_id The unique numeric ID for a listing in a specific [shop](/documentation/reference#tag/Shop). (required)
      * @param  string $language The IETF language tag for the language of this translation. Ex: de, en, es, fr, it, ja, nl, pl, pt, ru. (required)
-     * @param  \EtsyApi\Model\ListingTranslationRequest $listing_translation_request (optional)
+     * @param  string $title The title of the Listing of this Translation. (required)
+     * @param  string $description The description of the Listing of this Translation. (required)
+     * @param  string[] $tags The tags of the Listing of this Translation. (optional)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function createListingTranslationAsyncWithHttpInfo($shop_id, $listing_id, $language, $listing_translation_request = null)
+    public function createListingTranslationAsyncWithHttpInfo($shop_id, $listing_id, $language, $title, $description, $tags = null)
     {
         $returnType = '\EtsyApi\Model\ListingTranslation';
-        $request = $this->createListingTranslationRequest($shop_id, $listing_id, $language, $listing_translation_request);
+        $request = $this->createListingTranslationRequest($shop_id, $listing_id, $language, $title, $description, $tags);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -363,12 +371,14 @@ class ShopListingTranslationApi
      * @param  int $shop_id The unique positive non-zero numeric ID for an Etsy Shop. (required)
      * @param  int $listing_id The unique numeric ID for a listing in a specific [shop](/documentation/reference#tag/Shop). (required)
      * @param  string $language The IETF language tag for the language of this translation. Ex: de, en, es, fr, it, ja, nl, pl, pt, ru. (required)
-     * @param  \EtsyApi\Model\ListingTranslationRequest $listing_translation_request (optional)
+     * @param  string $title The title of the Listing of this Translation. (required)
+     * @param  string $description The description of the Listing of this Translation. (required)
+     * @param  string[] $tags The tags of the Listing of this Translation. (optional)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function createListingTranslationRequest($shop_id, $listing_id, $language, $listing_translation_request = null)
+    public function createListingTranslationRequest($shop_id, $listing_id, $language, $title, $description, $tags = null)
     {
         // verify the required parameter 'shop_id' is set
         if ($shop_id === null || (is_array($shop_id) && count($shop_id) === 0)) {
@@ -394,6 +404,18 @@ class ShopListingTranslationApi
         if ($language === null || (is_array($language) && count($language) === 0)) {
             throw new \InvalidArgumentException(
                 'Missing the required parameter $language when calling createListingTranslation'
+            );
+        }
+        // verify the required parameter 'title' is set
+        if ($title === null || (is_array($title) && count($title) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $title when calling createListingTranslation'
+            );
+        }
+        // verify the required parameter 'description' is set
+        if ($description === null || (is_array($description) && count($description) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $description when calling createListingTranslation'
             );
         }
 
@@ -431,6 +453,18 @@ class ShopListingTranslationApi
             );
         }
 
+        // form params
+        if ($title !== null) {
+            $formParams['title'] = ObjectSerializer::toFormValue($title);
+        }
+        // form params
+        if ($description !== null) {
+            $formParams['description'] = ObjectSerializer::toFormValue($description);
+        }
+        // form params
+        if ($tags !== null) {
+            $formParams['tags'] = ObjectSerializer::toFormValue($tags);
+        }
 
         if ($multipart) {
             $headers = $this->headerSelector->selectHeadersForMultipart(
@@ -439,18 +473,12 @@ class ShopListingTranslationApi
         } else {
             $headers = $this->headerSelector->selectHeaders(
                 ['application/json'],
-                ['application/json']
+                ['application/x-www-form-urlencoded']
             );
         }
 
         // for model (json/xml)
-        if (isset($listing_translation_request)) {
-            if ($headers['Content-Type'] === 'application/json') {
-                $httpBody = \GuzzleHttp\json_encode(ObjectSerializer::sanitizeForSerialization($listing_translation_request));
-            } else {
-                $httpBody = $listing_translation_request;
-            }
-        } elseif (count($formParams) > 0) {
+        if (count($formParams) > 0) {
             if ($multipart) {
                 $multipartContents = [];
                 foreach ($formParams as $formParamName => $formParamValue) {
