@@ -7082,7 +7082,14 @@
                     "state": {
                         "type": "string",
                         "description": "An enumerated string from any of: active, removed, sold_out, expired, alchemy, edit, create, private, or unavailable.",
-                        "enum": ["0", "1", "2", "3", "4", "5"]
+                        "enum": [
+                            "active",
+                            "inactive",
+                            "sold_out",
+                            "draft",
+                            "removed",
+                            "expired"
+                        ]
                     },
                     "creation_timestamp": {
                         "type": "integer",

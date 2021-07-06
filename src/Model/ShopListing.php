@@ -364,12 +364,12 @@ class ShopListing implements ModelInterface, ArrayAccess, \JsonSerializable
         return self::$openAPIModelName;
     }
 
-    const STATE__0 = '0';
-    const STATE__1 = '1';
-    const STATE__2 = '2';
-    const STATE__3 = '3';
-    const STATE__4 = '4';
-    const STATE__5 = '5';
+    const STATE_ACTIVE = 'active';
+    const STATE_INACTIVE = 'inactive';
+    const STATE_SOLD_OUT = 'sold_out';
+    const STATE_DRAFT = 'draft';
+    const STATE_REMOVED = 'removed';
+    const STATE_EXPIRED = 'expired';
     const WHO_MADE_I_DID = 'i_did';
     const WHO_MADE_SOMEONE_ELSE = 'someone_else';
     const WHO_MADE_COLLECTIVE = 'collective';
@@ -464,12 +464,12 @@ class ShopListing implements ModelInterface, ArrayAccess, \JsonSerializable
     public function getStateAllowableValues()
     {
         return [
-            self::STATE__0,
-            self::STATE__1,
-            self::STATE__2,
-            self::STATE__3,
-            self::STATE__4,
-            self::STATE__5,
+            self::STATE_ACTIVE,
+            self::STATE_INACTIVE,
+            self::STATE_SOLD_OUT,
+            self::STATE_DRAFT,
+            self::STATE_REMOVED,
+            self::STATE_EXPIRED,
         ];
     }
     

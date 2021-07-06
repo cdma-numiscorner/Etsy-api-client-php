@@ -1,6 +1,6 @@
 {
     "name": "cdma-numiscorner/etsy-api-client-php",
-    "version": "1.5",
+    "version": "1.6",
     "description": "Use the Etsy API to export products and handling orders.",
     "keywords": [
         "openapitools",
