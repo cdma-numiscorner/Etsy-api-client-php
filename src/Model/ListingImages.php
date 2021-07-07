@@ -62,7 +62,7 @@ class ListingImages implements ModelInterface, ArrayAccess, \JsonSerializable
       */
     protected static $openAPITypes = [
         'count' => 'int',
-        'results' => 'ListingImage[]'
+        'results' => '\EtsyApi\Model\ListingImage[]'
     ];
 
     /**
@@ -258,7 +258,7 @@ class ListingImages implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets results
      *
-     * @return ListingImage[]
+     * @return \EtsyApi\Model\ListingImage[]
      */
     public function getResults()
     {
@@ -268,7 +268,7 @@ class ListingImages implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets results
      *
-     * @param ListingImage[] $results The list of requested resources.
+     * @param \EtsyApi\Model\ListingImage[] $results The list of requested resources.
      *
      * @return self
      */

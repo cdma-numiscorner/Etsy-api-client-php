@@ -7709,12 +7709,7 @@
                         "type": "array",
                         "description": "The list of requested resources.",
                         "items": {
-                            "description": "The list of requested resources.",
-                            "allOf": [
-                                {
-                                    "$ref": "#/components/schemas/ListingImage"
-                                }
-                            ]
+                            "$ref": "#/components/schemas/ListingImage"
                         }
                     }
                 }
