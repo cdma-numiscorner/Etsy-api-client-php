@@ -4926,40 +4926,15 @@ class ShopListingApi
      *
      * @param  int $shop_id The unique positive non-zero numeric ID for an Etsy Shop. (required)
      * @param  int $listing_id The unique numeric ID for a listing in a specific [shop](/documentation/reference#tag/Shop). (required)
-     * @param  int $quantity The positive non-zero number of products available for purchase in the listing. Note: The listing quantity is the sum of available offering quantities. You can request the quantities for individual offerings from the ListingInventory resource using the [getListingInventory](/documentation/reference#operation/getListingInventory) endpoint. (optional)
-     * @param  float $price The positive non-zero price of the product. (Sold product listings are private) Note: The price is the minimum possible price. The getInventory method requests exact prices for available offerings. (optional)
-     * @param  string $title The listing&#39;s title string. Valid title strings contain only letters, numbers, punctuation marks, mathematical symbols, whitespace characters, ™, ©, and ®. (regex: /[^\\\\p{L}\\\\p{Nd}\\\\p{P}\\\\p{Sm}\\\\p{Zs}™©®]/u) You can only use the %, :, &amp; and + characters once each. (optional)
-     * @param  string $description A description string of the product for sale in the listing. (optional)
-     * @param  string[] $materials A list of material strings for materials used in the product. Valid materials strings contain only letters, numbers, and whitespace characters. (regex: /[^\\p{L}\\p{Nd}\\p{Zs}]/u) Default value is null. (optional)
-     * @param  bool $should_auto_renew When true, renews a listing for four months upon expriation. If set to true when previously false, etsy.com renews the listing before it expires, but the renewal period starts immidiately rather than extending the listing&#39;s expiration date. Any unused time remaining on the listing is lost. Renewals result in charges to a user&#39;s bill. (optional)
-     * @param  int $shipping_profile_id The numeric ID of the [shipping profile](/documentation/reference#tag/ShopListing-ShippingProfile) associated with the listing. (optional)
-     * @param  int $shop_section_id The numeric ID of the [shop section](/documentation/reference#tag/Shop-Section) for this listing. Default value is null. (optional)
-     * @param  float $item_weight The numeric weight of the product measured in units set in &#39;item_weight_unit&#39;. Default value is null. (optional)
-     * @param  float $item_length The numeric length of the product measured in units set in &#39;item_dimensions_unit&#39;. Default value is null. (optional)
-     * @param  float $item_width The numeric width of the product measured in units set in &#39;item_dimensions_unit&#39;. Default value is null. (optional)
-     * @param  float $item_height The numeric height of the product measured in units set in &#39;item_dimensions_unit&#39;. Default value is null. (optional)
-     * @param  string $item_weight_unit A string defining the units used to measure the weight of the product. Default value is null. (optional)
-     * @param  string $item_dimensions_unit A string defining the units used to measure the dimensions of the product. Default value is null. (optional)
-     * @param  bool $is_taxable When true, applicable [shop](/documentation/reference#tag/Shop) tax rates apply to this listing at checkout. (optional)
-     * @param  int $taxonomy_id The numeric taxonomy ID of the listing. The seller manages listing taxonomy IDs for their shop.  [See SellerTaxonomy](/documentation/reference#tag/SellerTaxonomy) for more information. (optional)
-     * @param  string[] $tags A list of tag strings for the listing. Valid tag strings contain only letters, numbers, whitespace characters, -, &#39;, ™, ©, and ®. (regex: /[^\\p{L}\\p{Nd}\\p{Zs}\\-&#39;™©®]/u) Default value is null. (optional)
-     * @param  string $who_made An enumerated string inidcated who made the product. Helps buyers locate the listing under the Handmade heading. (optional)
-     * @param  string $when_made An enumerated string for the era in which the maker made the product in this listing. Helps buyers locate the listing under the Vintage heading. (optional)
-     * @param  int $featured_rank The positive non-zero numeric position in the featured listings of the shop, with rank 1 listings appearing in the left-most position in featured listing on a shop’s home page. (optional)
-     * @param  bool $is_personalizable When true, this listing is personalizable. The default value is null. (optional)
-     * @param  bool $is_private When true, this is a private listing intendend for a specific buyer and hidden from shop view. (optional)
-     * @param  bool $publish When true, etsy.com publishes the listing. False does not publish the listing. (optional, default to false)
-     * @param  string $type An enumerated type string that indicates whether the listing is physical or a digital download. (optional, default to 'physical')
-     * @param  string $state An enumerated string from any of: active, removed, sold_out, expired, alchemy, edit, create, private, or unavailable. (optional, default to STATE_ACTIVE)
-     * @param  string[] $channels An array of enumerated channel ID strings. A channel is a venue for sellers to reach buyers in order to make sales. (optional)
+     * @param  \EtsyApi\Model\ShopListingRequest $shop_listing_request shop_listing_request (optional)
      *
      * @throws \EtsyApi\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return \EtsyApi\Model\ShopListing|\EtsyApi\Model\ErrorSchema|\EtsyApi\Model\ErrorSchema|\EtsyApi\Model\ErrorSchema|\EtsyApi\Model\ErrorSchema
      */
-    public function updateListing($shop_id, $listing_id, $quantity = null, $price = null, $title = null, $description = null, $materials = null, $should_auto_renew = null, $shipping_profile_id = null, $shop_section_id = null, $item_weight = null, $item_length = null, $item_width = null, $item_height = null, $item_weight_unit = null, $item_dimensions_unit = null, $is_taxable = null, $taxonomy_id = null, $tags = null, $who_made = null, $when_made = null, $featured_rank = null, $is_personalizable = null, $is_private = null, $publish = false, $type = 'physical', $state = STATE_ACTIVE, $channels = null)
+    public function updateListing($shop_id, $listing_id, $shop_listing_request = null)
     {
-        list($response) = $this->updateListingWithHttpInfo($shop_id, $listing_id, $quantity, $price, $title, $description, $materials, $should_auto_renew, $shipping_profile_id, $shop_section_id, $item_weight, $item_length, $item_width, $item_height, $item_weight_unit, $item_dimensions_unit, $is_taxable, $taxonomy_id, $tags, $who_made, $when_made, $featured_rank, $is_personalizable, $is_private, $publish, $type, $state, $channels);
+        list($response) = $this->updateListingWithHttpInfo($shop_id, $listing_id, $shop_listing_request);
         return $response;
     }
 
@@ -4968,40 +4943,15 @@ class ShopListingApi
      *
      * @param  int $shop_id The unique positive non-zero numeric ID for an Etsy Shop. (required)
      * @param  int $listing_id The unique numeric ID for a listing in a specific [shop](/documentation/reference#tag/Shop). (required)
-     * @param  int $quantity The positive non-zero number of products available for purchase in the listing. Note: The listing quantity is the sum of available offering quantities. You can request the quantities for individual offerings from the ListingInventory resource using the [getListingInventory](/documentation/reference#operation/getListingInventory) endpoint. (optional)
-     * @param  float $price The positive non-zero price of the product. (Sold product listings are private) Note: The price is the minimum possible price. The getInventory method requests exact prices for available offerings. (optional)
-     * @param  string $title The listing&#39;s title string. Valid title strings contain only letters, numbers, punctuation marks, mathematical symbols, whitespace characters, ™, ©, and ®. (regex: /[^\\\\p{L}\\\\p{Nd}\\\\p{P}\\\\p{Sm}\\\\p{Zs}™©®]/u) You can only use the %, :, &amp; and + characters once each. (optional)
-     * @param  string $description A description string of the product for sale in the listing. (optional)
-     * @param  string[] $materials A list of material strings for materials used in the product. Valid materials strings contain only letters, numbers, and whitespace characters. (regex: /[^\\p{L}\\p{Nd}\\p{Zs}]/u) Default value is null. (optional)
-     * @param  bool $should_auto_renew When true, renews a listing for four months upon expriation. If set to true when previously false, etsy.com renews the listing before it expires, but the renewal period starts immidiately rather than extending the listing&#39;s expiration date. Any unused time remaining on the listing is lost. Renewals result in charges to a user&#39;s bill. (optional)
-     * @param  int $shipping_profile_id The numeric ID of the [shipping profile](/documentation/reference#tag/ShopListing-ShippingProfile) associated with the listing. (optional)
-     * @param  int $shop_section_id The numeric ID of the [shop section](/documentation/reference#tag/Shop-Section) for this listing. Default value is null. (optional)
-     * @param  float $item_weight The numeric weight of the product measured in units set in &#39;item_weight_unit&#39;. Default value is null. (optional)
-     * @param  float $item_length The numeric length of the product measured in units set in &#39;item_dimensions_unit&#39;. Default value is null. (optional)
-     * @param  float $item_width The numeric width of the product measured in units set in &#39;item_dimensions_unit&#39;. Default value is null. (optional)
-     * @param  float $item_height The numeric height of the product measured in units set in &#39;item_dimensions_unit&#39;. Default value is null. (optional)
-     * @param  string $item_weight_unit A string defining the units used to measure the weight of the product. Default value is null. (optional)
-     * @param  string $item_dimensions_unit A string defining the units used to measure the dimensions of the product. Default value is null. (optional)
-     * @param  bool $is_taxable When true, applicable [shop](/documentation/reference#tag/Shop) tax rates apply to this listing at checkout. (optional)
-     * @param  int $taxonomy_id The numeric taxonomy ID of the listing. The seller manages listing taxonomy IDs for their shop.  [See SellerTaxonomy](/documentation/reference#tag/SellerTaxonomy) for more information. (optional)
-     * @param  string[] $tags A list of tag strings for the listing. Valid tag strings contain only letters, numbers, whitespace characters, -, &#39;, ™, ©, and ®. (regex: /[^\\p{L}\\p{Nd}\\p{Zs}\\-&#39;™©®]/u) Default value is null. (optional)
-     * @param  string $who_made An enumerated string inidcated who made the product. Helps buyers locate the listing under the Handmade heading. (optional)
-     * @param  string $when_made An enumerated string for the era in which the maker made the product in this listing. Helps buyers locate the listing under the Vintage heading. (optional)
-     * @param  int $featured_rank The positive non-zero numeric position in the featured listings of the shop, with rank 1 listings appearing in the left-most position in featured listing on a shop’s home page. (optional)
-     * @param  bool $is_personalizable When true, this listing is personalizable. The default value is null. (optional)
-     * @param  bool $is_private When true, this is a private listing intendend for a specific buyer and hidden from shop view. (optional)
-     * @param  bool $publish When true, etsy.com publishes the listing. False does not publish the listing. (optional, default to false)
-     * @param  string $type An enumerated type string that indicates whether the listing is physical or a digital download. (optional, default to 'physical')
-     * @param  string $state An enumerated string from any of: active, removed, sold_out, expired, alchemy, edit, create, private, or unavailable. (optional, default to STATE_ACTIVE)
-     * @param  string[] $channels An array of enumerated channel ID strings. A channel is a venue for sellers to reach buyers in order to make sales. (optional)
+     * @param  \EtsyApi\Model\ShopListingRequest $shop_listing_request (optional)
      *
      * @throws \EtsyApi\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return array of \EtsyApi\Model\ShopListing|\EtsyApi\Model\ErrorSchema|\EtsyApi\Model\ErrorSchema|\EtsyApi\Model\ErrorSchema|\EtsyApi\Model\ErrorSchema, HTTP status code, HTTP response headers (array of strings)
      */
-    public function updateListingWithHttpInfo($shop_id, $listing_id, $quantity = null, $price = null, $title = null, $description = null, $materials = null, $should_auto_renew = null, $shipping_profile_id = null, $shop_section_id = null, $item_weight = null, $item_length = null, $item_width = null, $item_height = null, $item_weight_unit = null, $item_dimensions_unit = null, $is_taxable = null, $taxonomy_id = null, $tags = null, $who_made = null, $when_made = null, $featured_rank = null, $is_personalizable = null, $is_private = null, $publish = false, $type = 'physical', $state = STATE_ACTIVE, $channels = null)
+    public function updateListingWithHttpInfo($shop_id, $listing_id, $shop_listing_request = null)
     {
-        $request = $this->updateListingRequest($shop_id, $listing_id, $quantity, $price, $title, $description, $materials, $should_auto_renew, $shipping_profile_id, $shop_section_id, $item_weight, $item_length, $item_width, $item_height, $item_weight_unit, $item_dimensions_unit, $is_taxable, $taxonomy_id, $tags, $who_made, $when_made, $featured_rank, $is_personalizable, $is_private, $publish, $type, $state, $channels);
+        $request = $this->updateListingRequest($shop_id, $listing_id, $shop_listing_request);
 
         try {
             $options = $this->createHttpClientOption();
@@ -5163,39 +5113,14 @@ class ShopListingApi
      *
      * @param  int $shop_id The unique positive non-zero numeric ID for an Etsy Shop. (required)
      * @param  int $listing_id The unique numeric ID for a listing in a specific [shop](/documentation/reference#tag/Shop). (required)
-     * @param  int $quantity The positive non-zero number of products available for purchase in the listing. Note: The listing quantity is the sum of available offering quantities. You can request the quantities for individual offerings from the ListingInventory resource using the [getListingInventory](/documentation/reference#operation/getListingInventory) endpoint. (optional)
-     * @param  float $price The positive non-zero price of the product. (Sold product listings are private) Note: The price is the minimum possible price. The getInventory method requests exact prices for available offerings. (optional)
-     * @param  string $title The listing&#39;s title string. Valid title strings contain only letters, numbers, punctuation marks, mathematical symbols, whitespace characters, ™, ©, and ®. (regex: /[^\\\\p{L}\\\\p{Nd}\\\\p{P}\\\\p{Sm}\\\\p{Zs}™©®]/u) You can only use the %, :, &amp; and + characters once each. (optional)
-     * @param  string $description A description string of the product for sale in the listing. (optional)
-     * @param  string[] $materials A list of material strings for materials used in the product. Valid materials strings contain only letters, numbers, and whitespace characters. (regex: /[^\\p{L}\\p{Nd}\\p{Zs}]/u) Default value is null. (optional)
-     * @param  bool $should_auto_renew When true, renews a listing for four months upon expriation. If set to true when previously false, etsy.com renews the listing before it expires, but the renewal period starts immidiately rather than extending the listing&#39;s expiration date. Any unused time remaining on the listing is lost. Renewals result in charges to a user&#39;s bill. (optional)
-     * @param  int $shipping_profile_id The numeric ID of the [shipping profile](/documentation/reference#tag/ShopListing-ShippingProfile) associated with the listing. (optional)
-     * @param  int $shop_section_id The numeric ID of the [shop section](/documentation/reference#tag/Shop-Section) for this listing. Default value is null. (optional)
-     * @param  float $item_weight The numeric weight of the product measured in units set in &#39;item_weight_unit&#39;. Default value is null. (optional)
-     * @param  float $item_length The numeric length of the product measured in units set in &#39;item_dimensions_unit&#39;. Default value is null. (optional)
-     * @param  float $item_width The numeric width of the product measured in units set in &#39;item_dimensions_unit&#39;. Default value is null. (optional)
-     * @param  float $item_height The numeric height of the product measured in units set in &#39;item_dimensions_unit&#39;. Default value is null. (optional)
-     * @param  string $item_weight_unit A string defining the units used to measure the weight of the product. Default value is null. (optional)
-     * @param  string $item_dimensions_unit A string defining the units used to measure the dimensions of the product. Default value is null. (optional)
-     * @param  bool $is_taxable When true, applicable [shop](/documentation/reference#tag/Shop) tax rates apply to this listing at checkout. (optional)
-     * @param  int $taxonomy_id The numeric taxonomy ID of the listing. The seller manages listing taxonomy IDs for their shop.  [See SellerTaxonomy](/documentation/reference#tag/SellerTaxonomy) for more information. (optional)
-     * @param  string[] $tags A list of tag strings for the listing. Valid tag strings contain only letters, numbers, whitespace characters, -, &#39;, ™, ©, and ®. (regex: /[^\\p{L}\\p{Nd}\\p{Zs}\\-&#39;™©®]/u) Default value is null. (optional)
-     * @param  string $who_made An enumerated string inidcated who made the product. Helps buyers locate the listing under the Handmade heading. (optional)
-     * @param  string $when_made An enumerated string for the era in which the maker made the product in this listing. Helps buyers locate the listing under the Vintage heading. (optional)
-     * @param  int $featured_rank The positive non-zero numeric position in the featured listings of the shop, with rank 1 listings appearing in the left-most position in featured listing on a shop’s home page. (optional)
-     * @param  bool $is_personalizable When true, this listing is personalizable. The default value is null. (optional)
-     * @param  bool $is_private When true, this is a private listing intendend for a specific buyer and hidden from shop view. (optional)
-     * @param  bool $publish When true, etsy.com publishes the listing. False does not publish the listing. (optional, default to false)
-     * @param  string $type An enumerated type string that indicates whether the listing is physical or a digital download. (optional, default to 'physical')
-     * @param  string $state An enumerated string from any of: active, removed, sold_out, expired, alchemy, edit, create, private, or unavailable. (optional, default to STATE_ACTIVE)
-     * @param  string[] $channels An array of enumerated channel ID strings. A channel is a venue for sellers to reach buyers in order to make sales. (optional)
+     * @param  \EtsyApi\Model\ShopListingRequest $shop_listing_request (optional)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function updateListingAsync($shop_id, $listing_id, $quantity = null, $price = null, $title = null, $description = null, $materials = null, $should_auto_renew = null, $shipping_profile_id = null, $shop_section_id = null, $item_weight = null, $item_length = null, $item_width = null, $item_height = null, $item_weight_unit = null, $item_dimensions_unit = null, $is_taxable = null, $taxonomy_id = null, $tags = null, $who_made = null, $when_made = null, $featured_rank = null, $is_personalizable = null, $is_private = null, $publish = false, $type = 'physical', $state = STATE_ACTIVE, $channels = null)
+    public function updateListingAsync($shop_id, $listing_id, $shop_listing_request = null)
     {
-        return $this->updateListingAsyncWithHttpInfo($shop_id, $listing_id, $quantity, $price, $title, $description, $materials, $should_auto_renew, $shipping_profile_id, $shop_section_id, $item_weight, $item_length, $item_width, $item_height, $item_weight_unit, $item_dimensions_unit, $is_taxable, $taxonomy_id, $tags, $who_made, $when_made, $featured_rank, $is_personalizable, $is_private, $publish, $type, $state, $channels)
+        return $this->updateListingAsyncWithHttpInfo($shop_id, $listing_id, $shop_listing_request)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -5210,40 +5135,15 @@ class ShopListingApi
      *
      * @param  int $shop_id The unique positive non-zero numeric ID for an Etsy Shop. (required)
      * @param  int $listing_id The unique numeric ID for a listing in a specific [shop](/documentation/reference#tag/Shop). (required)
-     * @param  int $quantity The positive non-zero number of products available for purchase in the listing. Note: The listing quantity is the sum of available offering quantities. You can request the quantities for individual offerings from the ListingInventory resource using the [getListingInventory](/documentation/reference#operation/getListingInventory) endpoint. (optional)
-     * @param  float $price The positive non-zero price of the product. (Sold product listings are private) Note: The price is the minimum possible price. The getInventory method requests exact prices for available offerings. (optional)
-     * @param  string $title The listing&#39;s title string. Valid title strings contain only letters, numbers, punctuation marks, mathematical symbols, whitespace characters, ™, ©, and ®. (regex: /[^\\\\p{L}\\\\p{Nd}\\\\p{P}\\\\p{Sm}\\\\p{Zs}™©®]/u) You can only use the %, :, &amp; and + characters once each. (optional)
-     * @param  string $description A description string of the product for sale in the listing. (optional)
-     * @param  string[] $materials A list of material strings for materials used in the product. Valid materials strings contain only letters, numbers, and whitespace characters. (regex: /[^\\p{L}\\p{Nd}\\p{Zs}]/u) Default value is null. (optional)
-     * @param  bool $should_auto_renew When true, renews a listing for four months upon expriation. If set to true when previously false, etsy.com renews the listing before it expires, but the renewal period starts immidiately rather than extending the listing&#39;s expiration date. Any unused time remaining on the listing is lost. Renewals result in charges to a user&#39;s bill. (optional)
-     * @param  int $shipping_profile_id The numeric ID of the [shipping profile](/documentation/reference#tag/ShopListing-ShippingProfile) associated with the listing. (optional)
-     * @param  int $shop_section_id The numeric ID of the [shop section](/documentation/reference#tag/Shop-Section) for this listing. Default value is null. (optional)
-     * @param  float $item_weight The numeric weight of the product measured in units set in &#39;item_weight_unit&#39;. Default value is null. (optional)
-     * @param  float $item_length The numeric length of the product measured in units set in &#39;item_dimensions_unit&#39;. Default value is null. (optional)
-     * @param  float $item_width The numeric width of the product measured in units set in &#39;item_dimensions_unit&#39;. Default value is null. (optional)
-     * @param  float $item_height The numeric height of the product measured in units set in &#39;item_dimensions_unit&#39;. Default value is null. (optional)
-     * @param  string $item_weight_unit A string defining the units used to measure the weight of the product. Default value is null. (optional)
-     * @param  string $item_dimensions_unit A string defining the units used to measure the dimensions of the product. Default value is null. (optional)
-     * @param  bool $is_taxable When true, applicable [shop](/documentation/reference#tag/Shop) tax rates apply to this listing at checkout. (optional)
-     * @param  int $taxonomy_id The numeric taxonomy ID of the listing. The seller manages listing taxonomy IDs for their shop.  [See SellerTaxonomy](/documentation/reference#tag/SellerTaxonomy) for more information. (optional)
-     * @param  string[] $tags A list of tag strings for the listing. Valid tag strings contain only letters, numbers, whitespace characters, -, &#39;, ™, ©, and ®. (regex: /[^\\p{L}\\p{Nd}\\p{Zs}\\-&#39;™©®]/u) Default value is null. (optional)
-     * @param  string $who_made An enumerated string inidcated who made the product. Helps buyers locate the listing under the Handmade heading. (optional)
-     * @param  string $when_made An enumerated string for the era in which the maker made the product in this listing. Helps buyers locate the listing under the Vintage heading. (optional)
-     * @param  int $featured_rank The positive non-zero numeric position in the featured listings of the shop, with rank 1 listings appearing in the left-most position in featured listing on a shop’s home page. (optional)
-     * @param  bool $is_personalizable When true, this listing is personalizable. The default value is null. (optional)
-     * @param  bool $is_private When true, this is a private listing intendend for a specific buyer and hidden from shop view. (optional)
-     * @param  bool $publish When true, etsy.com publishes the listing. False does not publish the listing. (optional, default to false)
-     * @param  string $type An enumerated type string that indicates whether the listing is physical or a digital download. (optional, default to 'physical')
-     * @param  string $state An enumerated string from any of: active, removed, sold_out, expired, alchemy, edit, create, private, or unavailable. (optional, default to STATE_ACTIVE)
-     * @param  string[] $channels An array of enumerated channel ID strings. A channel is a venue for sellers to reach buyers in order to make sales. (optional)
+     * @param  \EtsyApi\Model\ShopListingRequest $shop_listing_request (optional)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function updateListingAsyncWithHttpInfo($shop_id, $listing_id, $quantity = null, $price = null, $title = null, $description = null, $materials = null, $should_auto_renew = null, $shipping_profile_id = null, $shop_section_id = null, $item_weight = null, $item_length = null, $item_width = null, $item_height = null, $item_weight_unit = null, $item_dimensions_unit = null, $is_taxable = null, $taxonomy_id = null, $tags = null, $who_made = null, $when_made = null, $featured_rank = null, $is_personalizable = null, $is_private = null, $publish = false, $type = 'physical', $state = STATE_ACTIVE, $channels = null)
+    public function updateListingAsyncWithHttpInfo($shop_id, $listing_id, $shop_listing_request = null)
     {
         $returnType = '\EtsyApi\Model\ShopListing';
-        $request = $this->updateListingRequest($shop_id, $listing_id, $quantity, $price, $title, $description, $materials, $should_auto_renew, $shipping_profile_id, $shop_section_id, $item_weight, $item_length, $item_width, $item_height, $item_weight_unit, $item_dimensions_unit, $is_taxable, $taxonomy_id, $tags, $who_made, $when_made, $featured_rank, $is_personalizable, $is_private, $publish, $type, $state, $channels);
+        $request = $this->updateListingRequest($shop_id, $listing_id, $shop_listing_request);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -5284,37 +5184,12 @@ class ShopListingApi
      *
      * @param  int $shop_id The unique positive non-zero numeric ID for an Etsy Shop. (required)
      * @param  int $listing_id The unique numeric ID for a listing in a specific [shop](/documentation/reference#tag/Shop). (required)
-     * @param  int $quantity The positive non-zero number of products available for purchase in the listing. Note: The listing quantity is the sum of available offering quantities. You can request the quantities for individual offerings from the ListingInventory resource using the [getListingInventory](/documentation/reference#operation/getListingInventory) endpoint. (optional)
-     * @param  float $price The positive non-zero price of the product. (Sold product listings are private) Note: The price is the minimum possible price. The getInventory method requests exact prices for available offerings. (optional)
-     * @param  string $title The listing&#39;s title string. Valid title strings contain only letters, numbers, punctuation marks, mathematical symbols, whitespace characters, ™, ©, and ®. (regex: /[^\\\\p{L}\\\\p{Nd}\\\\p{P}\\\\p{Sm}\\\\p{Zs}™©®]/u) You can only use the %, :, &amp; and + characters once each. (optional)
-     * @param  string $description A description string of the product for sale in the listing. (optional)
-     * @param  string[] $materials A list of material strings for materials used in the product. Valid materials strings contain only letters, numbers, and whitespace characters. (regex: /[^\\p{L}\\p{Nd}\\p{Zs}]/u) Default value is null. (optional)
-     * @param  bool $should_auto_renew When true, renews a listing for four months upon expriation. If set to true when previously false, etsy.com renews the listing before it expires, but the renewal period starts immidiately rather than extending the listing&#39;s expiration date. Any unused time remaining on the listing is lost. Renewals result in charges to a user&#39;s bill. (optional)
-     * @param  int $shipping_profile_id The numeric ID of the [shipping profile](/documentation/reference#tag/ShopListing-ShippingProfile) associated with the listing. (optional)
-     * @param  int $shop_section_id The numeric ID of the [shop section](/documentation/reference#tag/Shop-Section) for this listing. Default value is null. (optional)
-     * @param  float $item_weight The numeric weight of the product measured in units set in &#39;item_weight_unit&#39;. Default value is null. (optional)
-     * @param  float $item_length The numeric length of the product measured in units set in &#39;item_dimensions_unit&#39;. Default value is null. (optional)
-     * @param  float $item_width The numeric width of the product measured in units set in &#39;item_dimensions_unit&#39;. Default value is null. (optional)
-     * @param  float $item_height The numeric height of the product measured in units set in &#39;item_dimensions_unit&#39;. Default value is null. (optional)
-     * @param  string $item_weight_unit A string defining the units used to measure the weight of the product. Default value is null. (optional)
-     * @param  string $item_dimensions_unit A string defining the units used to measure the dimensions of the product. Default value is null. (optional)
-     * @param  bool $is_taxable When true, applicable [shop](/documentation/reference#tag/Shop) tax rates apply to this listing at checkout. (optional)
-     * @param  int $taxonomy_id The numeric taxonomy ID of the listing. The seller manages listing taxonomy IDs for their shop.  [See SellerTaxonomy](/documentation/reference#tag/SellerTaxonomy) for more information. (optional)
-     * @param  string[] $tags A list of tag strings for the listing. Valid tag strings contain only letters, numbers, whitespace characters, -, &#39;, ™, ©, and ®. (regex: /[^\\p{L}\\p{Nd}\\p{Zs}\\-&#39;™©®]/u) Default value is null. (optional)
-     * @param  string $who_made An enumerated string inidcated who made the product. Helps buyers locate the listing under the Handmade heading. (optional)
-     * @param  string $when_made An enumerated string for the era in which the maker made the product in this listing. Helps buyers locate the listing under the Vintage heading. (optional)
-     * @param  int $featured_rank The positive non-zero numeric position in the featured listings of the shop, with rank 1 listings appearing in the left-most position in featured listing on a shop’s home page. (optional)
-     * @param  bool $is_personalizable When true, this listing is personalizable. The default value is null. (optional)
-     * @param  bool $is_private When true, this is a private listing intendend for a specific buyer and hidden from shop view. (optional)
-     * @param  bool $publish When true, etsy.com publishes the listing. False does not publish the listing. (optional, default to false)
-     * @param  string $type An enumerated type string that indicates whether the listing is physical or a digital download. (optional, default to 'physical')
-     * @param  string $state An enumerated string from any of: active, removed, sold_out, expired, alchemy, edit, create, private, or unavailable. (optional, default to STATE_ACTIVE)
-     * @param  string[] $channels An array of enumerated channel ID strings. A channel is a venue for sellers to reach buyers in order to make sales. (optional)
+     * @param  \EtsyApi\Model\ShopListingRequest $shop_listing_request (optional)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function updateListingRequest($shop_id, $listing_id, $quantity = null, $price = null, $title = null, $description = null, $materials = null, $should_auto_renew = null, $shipping_profile_id = null, $shop_section_id = null, $item_weight = null, $item_length = null, $item_width = null, $item_height = null, $item_weight_unit = null, $item_dimensions_unit = null, $is_taxable = null, $taxonomy_id = null, $tags = null, $who_made = null, $when_made = null, $featured_rank = null, $is_personalizable = null, $is_private = null, $publish = false, $type = 'physical', $state = STATE_ACTIVE, $channels = null)
+    public function updateListingRequest($shop_id, $listing_id, $shop_listing_request = null)
     {
         // verify the required parameter 'shop_id' is set
         if ($shop_id === null || (is_array($shop_id) && count($shop_id) === 0)) {
@@ -5334,53 +5209,6 @@ class ShopListingApi
         }
         if ($listing_id < 1) {
             throw new \InvalidArgumentException('invalid value for "$listing_id" when calling ShopListingApi.updateListing, must be bigger than or equal to 1.');
-        }
-
-        if ($price !== null && $price > 50000) {
-            throw new \InvalidArgumentException('invalid value for "$price" when calling ShopListingApi.updateListing, must be smaller than or equal to 50000.');
-        }
-        if ($price !== null && $price < 0.2) {
-            throw new \InvalidArgumentException('invalid value for "$price" when calling ShopListingApi.updateListing, must be bigger than or equal to 0.2.');
-        }
-
-        if ($shipping_profile_id !== null && $shipping_profile_id < 1) {
-            throw new \InvalidArgumentException('invalid value for "$shipping_profile_id" when calling ShopListingApi.updateListing, must be bigger than or equal to 1.');
-        }
-
-        if ($shop_section_id !== null && $shop_section_id < 1) {
-            throw new \InvalidArgumentException('invalid value for "$shop_section_id" when calling ShopListingApi.updateListing, must be bigger than or equal to 1.');
-        }
-
-        if ($item_weight !== null && $item_weight > 1.79769313486E+308) {
-            throw new \InvalidArgumentException('invalid value for "$item_weight" when calling ShopListingApi.updateListing, must be smaller than or equal to 1.79769313486E+308.');
-        }
-        if ($item_weight !== null && $item_weight < 0) {
-            throw new \InvalidArgumentException('invalid value for "$item_weight" when calling ShopListingApi.updateListing, must be bigger than or equal to 0.');
-        }
-
-        if ($item_length !== null && $item_length > 1.79769313486E+308) {
-            throw new \InvalidArgumentException('invalid value for "$item_length" when calling ShopListingApi.updateListing, must be smaller than or equal to 1.79769313486E+308.');
-        }
-        if ($item_length !== null && $item_length < 0) {
-            throw new \InvalidArgumentException('invalid value for "$item_length" when calling ShopListingApi.updateListing, must be bigger than or equal to 0.');
-        }
-
-        if ($item_width !== null && $item_width > 1.79769313486E+308) {
-            throw new \InvalidArgumentException('invalid value for "$item_width" when calling ShopListingApi.updateListing, must be smaller than or equal to 1.79769313486E+308.');
-        }
-        if ($item_width !== null && $item_width < 0) {
-            throw new \InvalidArgumentException('invalid value for "$item_width" when calling ShopListingApi.updateListing, must be bigger than or equal to 0.');
-        }
-
-        if ($item_height !== null && $item_height > 1.79769313486E+308) {
-            throw new \InvalidArgumentException('invalid value for "$item_height" when calling ShopListingApi.updateListing, must be smaller than or equal to 1.79769313486E+308.');
-        }
-        if ($item_height !== null && $item_height < 0) {
-            throw new \InvalidArgumentException('invalid value for "$item_height" when calling ShopListingApi.updateListing, must be bigger than or equal to 0.');
-        }
-
-        if ($taxonomy_id !== null && $taxonomy_id < 1) {
-            throw new \InvalidArgumentException('invalid value for "$taxonomy_id" when calling ShopListingApi.updateListing, must be bigger than or equal to 1.');
         }
 
 
@@ -5410,110 +5238,6 @@ class ShopListingApi
             );
         }
 
-        // form params
-        if ($quantity !== null) {
-            $formParams['quantity'] = ObjectSerializer::toFormValue($quantity);
-        }
-        // form params
-        if ($price !== null) {
-            $formParams['price'] = ObjectSerializer::toFormValue($price);
-        }
-        // form params
-        if ($title !== null) {
-            $formParams['title'] = ObjectSerializer::toFormValue($title);
-        }
-        // form params
-        if ($description !== null) {
-            $formParams['description'] = ObjectSerializer::toFormValue($description);
-        }
-        // form params
-        if ($materials !== null) {
-            $formParams['materials'] = ObjectSerializer::toFormValue($materials);
-        }
-        // form params
-        if ($should_auto_renew !== null) {
-            $formParams['should_auto_renew'] = ObjectSerializer::toFormValue($should_auto_renew);
-        }
-        // form params
-        if ($shipping_profile_id !== null) {
-            $formParams['shipping_profile_id'] = ObjectSerializer::toFormValue($shipping_profile_id);
-        }
-        // form params
-        if ($shop_section_id !== null) {
-            $formParams['shop_section_id'] = ObjectSerializer::toFormValue($shop_section_id);
-        }
-        // form params
-        if ($item_weight !== null) {
-            $formParams['item_weight'] = ObjectSerializer::toFormValue($item_weight);
-        }
-        // form params
-        if ($item_length !== null) {
-            $formParams['item_length'] = ObjectSerializer::toFormValue($item_length);
-        }
-        // form params
-        if ($item_width !== null) {
-            $formParams['item_width'] = ObjectSerializer::toFormValue($item_width);
-        }
-        // form params
-        if ($item_height !== null) {
-            $formParams['item_height'] = ObjectSerializer::toFormValue($item_height);
-        }
-        // form params
-        if ($item_weight_unit !== null) {
-            $formParams['item_weight_unit'] = ObjectSerializer::toFormValue($item_weight_unit);
-        }
-        // form params
-        if ($item_dimensions_unit !== null) {
-            $formParams['item_dimensions_unit'] = ObjectSerializer::toFormValue($item_dimensions_unit);
-        }
-        // form params
-        if ($is_taxable !== null) {
-            $formParams['is_taxable'] = ObjectSerializer::toFormValue($is_taxable);
-        }
-        // form params
-        if ($taxonomy_id !== null) {
-            $formParams['taxonomy_id'] = ObjectSerializer::toFormValue($taxonomy_id);
-        }
-        // form params
-        if ($tags !== null) {
-            $formParams['tags'] = ObjectSerializer::toFormValue($tags);
-        }
-        // form params
-        if ($who_made !== null) {
-            $formParams['who_made'] = ObjectSerializer::toFormValue($who_made);
-        }
-        // form params
-        if ($when_made !== null) {
-            $formParams['when_made'] = ObjectSerializer::toFormValue($when_made);
-        }
-        // form params
-        if ($featured_rank !== null) {
-            $formParams['featured_rank'] = ObjectSerializer::toFormValue($featured_rank);
-        }
-        // form params
-        if ($is_personalizable !== null) {
-            $formParams['is_personalizable'] = ObjectSerializer::toFormValue($is_personalizable);
-        }
-        // form params
-        if ($is_private !== null) {
-            $formParams['is_private'] = ObjectSerializer::toFormValue($is_private);
-        }
-        // form params
-        if ($publish !== null) {
-            $formParams['publish'] = ObjectSerializer::toFormValue($publish);
-        }
-        // form params
-        if ($type !== null) {
-            $formParams['type'] = ObjectSerializer::toFormValue($type);
-        }
-        // form params
-        if ($state !== null) {
-            $formParams['state'] = ObjectSerializer::toFormValue($state);
-        }
-        // form params
-        if ($channels !== null) {
-            $formParams['channels'] = ObjectSerializer::toFormValue($channels);
-        }
 
         if ($multipart) {
             $headers = $this->headerSelector->selectHeadersForMultipart(
@@ -5522,12 +5246,18 @@ class ShopListingApi
         } else {
             $headers = $this->headerSelector->selectHeaders(
                 ['application/json'],
-                ['application/x-www-form-urlencoded']
+                ['application/json']
             );
         }
 
         // for model (json/xml)
-        if (count($formParams) > 0) {
+        if (isset($shop_listing_request)) {
+            if ($headers['Content-Type'] === 'application/json') {
+                $httpBody = \GuzzleHttp\json_encode(ObjectSerializer::sanitizeForSerialization($shop_listing_request));
+            } else {
+                $httpBody = $shop_listing_request;
+            }
+        } elseif (count($formParams) > 0) {
             if ($multipart) {
                 $multipartContents = [];
                 foreach ($formParams as $formParamName => $formParamValue) {
