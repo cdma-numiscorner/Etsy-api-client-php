@@ -65,7 +65,7 @@ class ListingInventoryProductOffering implements ModelInterface, ArrayAccess, \J
         'quantity' => 'int',
         'is_enabled' => 'bool',
         'is_deleted' => 'bool',
-        'price' => 'Money'
+        'price' => '\EtsyApi\Model\Money'
     ];
 
     /**
@@ -366,7 +366,7 @@ class ListingInventoryProductOffering implements ModelInterface, ArrayAccess, \J
     /**
      * Gets price
      *
-     * @return Money
+     * @return \EtsyApi\Model\Money
      */
     public function getPrice()
     {
@@ -376,7 +376,7 @@ class ListingInventoryProductOffering implements ModelInterface, ArrayAccess, \J
     /**
      * Sets price
      *
-     * @param Money $price Price data for this ProductOffering
+     * @param \EtsyApi\Model\Money $price price
      *
      * @return self
      */

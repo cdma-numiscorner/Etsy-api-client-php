@@ -7874,24 +7874,14 @@
                         "type": "array",
                         "description": "A list of product offering entries for this product.",
                         "items": {
-                            "description": "A list of product offering entries for this product.",
-                            "allOf": [
-                                {
-                                    "$ref": "#/components/schemas/ListingInventoryProductOffering"
-                                }
-                            ]
+                            "$ref": "#/components/schemas/ListingInventoryProductOffering"
                         }
                     },
                     "property_values": {
                         "type": "array",
                         "description": "A list of property value entries for this product.",
                         "items": {
-                            "description": "A list of property value entries for this product.",
-                            "allOf": [
-                                {
-                                    "$ref": "#/components/schemas/ListingPropertyValue"
-                                }
-                            ]
+                            "$ref": "#/components/schemas/ListingPropertyValue"
                         }
                     }
                 }
@@ -7926,12 +7916,7 @@
                         "description": "Whether or not the offering has been deleted."
                     },
                     "price": {
-                        "description": "Price data for this ProductOffering",
-                        "allOf": [
-                            {
-                                "$ref": "#/components/schemas/Money"
-                            }
-                        ]
+                        "$ref": "#/components/schemas/Money"
                     }
                 }
             },
@@ -7996,11 +7981,7 @@
                     "results": {
                         "type": "array",
                         "items": {
-                            "allOf": [
-                                {
-                                    "$ref": "#/components/schemas/ListingPropertyValue"
-                                }
-                            ]
+                            "$ref": "#/components/schemas/ListingPropertyValue"
                         }
                     }
                 }

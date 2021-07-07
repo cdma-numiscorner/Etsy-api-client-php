@@ -62,7 +62,7 @@ class ListingPropertyValues implements ModelInterface, ArrayAccess, \JsonSeriali
       */
     protected static $openAPITypes = [
         'count' => 'int',
-        'results' => 'ListingPropertyValue[]'
+        'results' => '\EtsyApi\Model\ListingPropertyValue[]'
     ];
 
     /**
@@ -258,7 +258,7 @@ class ListingPropertyValues implements ModelInterface, ArrayAccess, \JsonSeriali
     /**
      * Gets results
      *
-     * @return ListingPropertyValue[]
+     * @return \EtsyApi\Model\ListingPropertyValue[]
      */
     public function getResults()
     {
@@ -268,7 +268,7 @@ class ListingPropertyValues implements ModelInterface, ArrayAccess, \JsonSeriali
     /**
      * Sets results
      *
-     * @param ListingPropertyValue[] $results results
+     * @param \EtsyApi\Model\ListingPropertyValue[] $results results
      *
      * @return self
      */

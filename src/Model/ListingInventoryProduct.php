@@ -64,8 +64,8 @@ class ListingInventoryProduct implements ModelInterface, ArrayAccess, \JsonSeria
         'product_id' => 'int',
         'sku' => 'string',
         'is_deleted' => 'bool',
-        'offerings' => 'ListingInventoryProductOffering[]',
-        'property_values' => 'ListingPropertyValue[]'
+        'offerings' => '\EtsyApi\Model\ListingInventoryProductOffering[]',
+        'property_values' => '\EtsyApi\Model\ListingPropertyValue[]'
     ];
 
     /**
@@ -333,7 +333,7 @@ class ListingInventoryProduct implements ModelInterface, ArrayAccess, \JsonSeria
     /**
      * Gets offerings
      *
-     * @return ListingInventoryProductOffering[]
+     * @return \EtsyApi\Model\ListingInventoryProductOffering[]
      */
     public function getOfferings()
     {
@@ -343,7 +343,7 @@ class ListingInventoryProduct implements ModelInterface, ArrayAccess, \JsonSeria
     /**
      * Sets offerings
      *
-     * @param ListingInventoryProductOffering[] $offerings A list of product offering entries for this product.
+     * @param \EtsyApi\Model\ListingInventoryProductOffering[] $offerings A list of product offering entries for this product.
      *
      * @return self
      */
@@ -357,7 +357,7 @@ class ListingInventoryProduct implements ModelInterface, ArrayAccess, \JsonSeria
     /**
      * Gets property_values
      *
-     * @return ListingPropertyValue[]
+     * @return \EtsyApi\Model\ListingPropertyValue[]
      */
     public function getPropertyValues()
     {
@@ -367,7 +367,7 @@ class ListingInventoryProduct implements ModelInterface, ArrayAccess, \JsonSeria
     /**
      * Sets property_values
      *
-     * @param ListingPropertyValue[] $property_values A list of property value entries for this product.
+     * @param \EtsyApi\Model\ListingPropertyValue[] $property_values A list of property value entries for this product.
      *
      * @return self
      */
