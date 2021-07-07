@@ -61,7 +61,7 @@ class ListingInventory implements ModelInterface, ArrayAccess, \JsonSerializable
       * @var string[]
       */
     protected static $openAPITypes = [
-        'products' => 'ListingInventoryProduct[]',
+        'products' => '\EtsyApi\Model\ListingInventoryProduct[]',
         'price_on_property' => 'int[]',
         'quantity_on_property' => 'int[]',
         'sku_on_property' => 'int[]'
@@ -243,7 +243,7 @@ class ListingInventory implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets products
      *
-     * @return ListingInventoryProduct[]
+     * @return \EtsyApi\Model\ListingInventoryProduct[]
      */
     public function getProducts()
     {
@@ -253,7 +253,7 @@ class ListingInventory implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets products
      *
-     * @param ListingInventoryProduct[] $products A JSON array of products available in a listing, even if only one product. All field names in the JSON blobs are lowercase.
+     * @param \EtsyApi\Model\ListingInventoryProduct[] $products A JSON array of products available in a listing, even if only one product. All field names in the JSON blobs are lowercase.
      *
      * @return self
      */

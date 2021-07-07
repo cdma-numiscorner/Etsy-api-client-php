@@ -7728,12 +7728,7 @@
                         "type": "array",
                         "description": "A JSON array of products available in a listing, even if only one product. All field names in the JSON blobs are lowercase.",
                         "items": {
-                            "description": "A JSON array of products available in a listing, even if only one product. All field names in the JSON blobs are lowercase.",
-                            "allOf": [
-                                {
-                                    "$ref": "#/components/schemas/ListingInventoryProduct"
-                                }
-                            ]
+                            "$ref": "#/components/schemas/ListingInventoryProduct"
                         }
                     },
                     "price_on_property": {
