@@ -1586,7 +1586,7 @@
                     "content": {
                         "application/json": {
                             "schema": {
-                               "$ref" : "#/components/schemas/ListingInventoryRequest"
+                               "$ref" : "#/components/schemas/ListingInventory"
                             }
                         }
                     }

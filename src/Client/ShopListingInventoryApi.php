@@ -455,15 +455,15 @@ class ShopListingInventoryApi
      * Operation updateListingInventory
      *
      * @param  int $listing_id The unique numeric ID for a listing in a specific [shop](/documentation/reference#tag/Shop). (required)
-     * @param  \EtsyApi\Model\ListingInventoryRequest $listing_inventory_request listing_inventory_request (optional)
+     * @param  \EtsyApi\Model\ListingInventory $listing_inventory listing_inventory (optional)
      *
      * @throws \EtsyApi\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return \EtsyApi\Model\ListingInventory|\EtsyApi\Model\ErrorSchema|\EtsyApi\Model\ErrorSchema|\EtsyApi\Model\ErrorSchema|\EtsyApi\Model\ErrorSchema
      */
-    public function updateListingInventory($listing_id, $listing_inventory_request = null)
+    public function updateListingInventory($listing_id, $listing_inventory = null)
     {
-        list($response) = $this->updateListingInventoryWithHttpInfo($listing_id, $listing_inventory_request);
+        list($response) = $this->updateListingInventoryWithHttpInfo($listing_id, $listing_inventory);
         return $response;
     }
 
@@ -471,15 +471,15 @@ class ShopListingInventoryApi
      * Operation updateListingInventoryWithHttpInfo
      *
      * @param  int $listing_id The unique numeric ID for a listing in a specific [shop](/documentation/reference#tag/Shop). (required)
-     * @param  \EtsyApi\Model\ListingInventoryRequest $listing_inventory_request (optional)
+     * @param  \EtsyApi\Model\ListingInventory $listing_inventory (optional)
      *
      * @throws \EtsyApi\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return array of \EtsyApi\Model\ListingInventory|\EtsyApi\Model\ErrorSchema|\EtsyApi\Model\ErrorSchema|\EtsyApi\Model\ErrorSchema|\EtsyApi\Model\ErrorSchema, HTTP status code, HTTP response headers (array of strings)
      */
-    public function updateListingInventoryWithHttpInfo($listing_id, $listing_inventory_request = null)
+    public function updateListingInventoryWithHttpInfo($listing_id, $listing_inventory = null)
     {
-        $request = $this->updateListingInventoryRequest($listing_id, $listing_inventory_request);
+        $request = $this->updateListingInventoryRequest($listing_id, $listing_inventory);
 
         try {
             $options = $this->createHttpClientOption();
@@ -640,14 +640,14 @@ class ShopListingInventoryApi
      * 
      *
      * @param  int $listing_id The unique numeric ID for a listing in a specific [shop](/documentation/reference#tag/Shop). (required)
-     * @param  \EtsyApi\Model\ListingInventoryRequest $listing_inventory_request (optional)
+     * @param  \EtsyApi\Model\ListingInventory $listing_inventory (optional)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function updateListingInventoryAsync($listing_id, $listing_inventory_request = null)
+    public function updateListingInventoryAsync($listing_id, $listing_inventory = null)
     {
-        return $this->updateListingInventoryAsyncWithHttpInfo($listing_id, $listing_inventory_request)
+        return $this->updateListingInventoryAsyncWithHttpInfo($listing_id, $listing_inventory)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -661,15 +661,15 @@ class ShopListingInventoryApi
      * 
      *
      * @param  int $listing_id The unique numeric ID for a listing in a specific [shop](/documentation/reference#tag/Shop). (required)
-     * @param  \EtsyApi\Model\ListingInventoryRequest $listing_inventory_request (optional)
+     * @param  \EtsyApi\Model\ListingInventory $listing_inventory (optional)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function updateListingInventoryAsyncWithHttpInfo($listing_id, $listing_inventory_request = null)
+    public function updateListingInventoryAsyncWithHttpInfo($listing_id, $listing_inventory = null)
     {
         $returnType = '\EtsyApi\Model\ListingInventory';
-        $request = $this->updateListingInventoryRequest($listing_id, $listing_inventory_request);
+        $request = $this->updateListingInventoryRequest($listing_id, $listing_inventory);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -709,12 +709,12 @@ class ShopListingInventoryApi
      * Create request for operation 'updateListingInventory'
      *
      * @param  int $listing_id The unique numeric ID for a listing in a specific [shop](/documentation/reference#tag/Shop). (required)
-     * @param  \EtsyApi\Model\ListingInventoryRequest $listing_inventory_request (optional)
+     * @param  \EtsyApi\Model\ListingInventory $listing_inventory (optional)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function updateListingInventoryRequest($listing_id, $listing_inventory_request = null)
+    public function updateListingInventoryRequest($listing_id, $listing_inventory = null)
     {
         // verify the required parameter 'listing_id' is set
         if ($listing_id === null || (is_array($listing_id) && count($listing_id) === 0)) {
@@ -758,11 +758,11 @@ class ShopListingInventoryApi
         }
 
         // for model (json/xml)
-        if (isset($listing_inventory_request)) {
+        if (isset($listing_inventory)) {
             if ($headers['Content-Type'] === 'application/json') {
-                $httpBody = \GuzzleHttp\json_encode(ObjectSerializer::sanitizeForSerialization($listing_inventory_request));
+                $httpBody = \GuzzleHttp\json_encode(ObjectSerializer::sanitizeForSerialization($listing_inventory));
             } else {
-                $httpBody = $listing_inventory_request;
+                $httpBody = $listing_inventory;
             }
         } elseif (count($formParams) > 0) {
             if ($multipart) {
